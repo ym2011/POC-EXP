@@ -53,5 +53,6 @@ S2-050 ​​ - 使用URLValidator时的正则表达式拒绝服务（类似于S
 S2-051 - 当使用Struts REST插件时，远程攻击者可能通过发送精心设计的xml请求来创建DoS攻击
 S2-052 - 使用带XStream处理程序的Struts REST插件处理XML时可能发生的远程执行代码攻击有效载荷
 S2-053 - 在Freemarker标记中使用非意图表达而不是字符串文字时可能发生的远程执行代码攻击
-S2-054 - 使用Struts REST插件时，可以使用精心制作的JSON请求执行DoS攻击
-S2- 055 - Jacks中的RCE漏洞在JSON库上
+S2-054 - ApacheStruts REST插件使用了过时的JSON-lib库，击者可以通过构造特制的JSON恶意请求造成DOS攻击。
+S2- 055 - 由于ApacheStruts调用了存在反序列化漏洞的Jackson JSON库，导致了反序列化漏洞的产生。
+S2-056	-	当使用XStream组件对XML格式的数据包进行反序列化操作，且未对数据内容进行有效验证时，攻击者可通过提交恶意XML数据对应用进行远程DoS攻击。
