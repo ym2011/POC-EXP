@@ -1,0 +1,6 @@
+XRAY 0.19.2
+@zema1 zema1 released this 2 days ago · 1 commit to master since this release
+Features:
+添加 servicescan 命令，支持 Tomcat AJP 协议任意文件读取漏洞（幽灵猫漏洞 https://www.chaitin.cn/zh/ghostcat)
+使用示例 ./xray servicescan --target 127.0.0.1:8009
+批量检测 ./xray servicescan --target-file example.txt

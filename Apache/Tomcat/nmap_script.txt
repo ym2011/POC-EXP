@@ -1,0 +1,1 @@
+nmap -O -T4 -A --script=ajp-request.nse  172.10.10.10
