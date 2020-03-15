@@ -1,0 +1,1615 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0045)http://www.wooyun.org/bugs/wooyun-2010-073449 -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta http-equiv="x-ua-compatible" content="ie=7">
+<title> 通用型正方教务（通杀各版本）存在注入（不需登陆）+获得webshell+提权内网漫游 | WooYun-2014-73449 | WooYun.org </title>
+<meta name="author" content="80sec">
+<meta name="copyright" content="http://www.wooyun.org/">
+<meta name="keywords" content="杭州正方漏洞,sin,SQL注射漏洞,wooyun,应用安全,web安全,系统安全,网络安全,漏洞公布,漏洞报告,安全资讯。">
+<meta name="description" content="某个接口页面存在oracle盲注，可以获得当前用户数据库，dump教师用户表，分析密文加密特征(前人研究成果+基友助攻)，破译加密的密码。前台管理员登陆，后台文件上传基于黑名单原理，过滤u完全，上传特定文件，生成一句话。菜刀连接，大马提权。|WooYun是一个位于厂商和安全研究者之间的漏洞报告平台,注重尊重,进步,与意义">
+<link rel="icon" href="http://www.wooyun.org/favicon.ico" sizes="32x32">
+<link href="./通用型正方教务（通杀各版本）存在注入（不需登陆）+获得webshell+提权内网漫游   WooYun-2014-73449   WooYun.org_files/style.css" rel="stylesheet" type="text/css">
+<script src="./通用型正方教务（通杀各版本）存在注入（不需登陆）+获得webshell+提权内网漫游   WooYun-2014-73449   WooYun.org_files/jquery-1.4.2.min.js" type="text/javascript"></script>
+<script src="./通用型正方教务（通杀各版本）存在注入（不需登陆）+获得webshell+提权内网漫游   WooYun-2014-73449   WooYun.org_files/logger.js"></script><link href="./通用型正方教务（通杀各版本）存在注入（不需登陆）+获得webshell+提权内网漫游   WooYun-2014-73449   WooYun.org_files/bdsstyle.css" rel="stylesheet" type="text/css"></head>
+
+<body id="bugDetail"><iframe frameborder="0" style="display: none;"></iframe><div id="bdshare_s" style="display: block;"><iframe id="bdsIfr" style="position:absolute;display:none;z-index:9999;" frameborder="0"></iframe><div id="bdshare_l" style="display: none;"><div id="bdshare_l_c"><h6>分享到</h6><ul><li><a href="http://www.wooyun.org/bugs/wooyun-2010-073449#" class="bds_mshare mshare">一键分享</a></li><li><a href="http://www.wooyun.org/bugs/wooyun-2010-073449#" class="bds_qzone qqkj">QQ空间</a></li><li><a href="http://www.wooyun.org/bugs/wooyun-2010-073449#" class="bds_tsina xlwb">新浪微博</a></li><li><a href="http://www.wooyun.org/bugs/wooyun-2010-073449#" class="bds_bdysc bdysc">百度云收藏</a></li><li><a href="http://www.wooyun.org/bugs/wooyun-2010-073449#" class="bds_renren rrw">人人网</a></li><li><a href="http://www.wooyun.org/bugs/wooyun-2010-073449#" class="bds_tqq txwb">腾讯微博</a></li><li><a href="http://www.wooyun.org/bugs/wooyun-2010-073449#" class="bds_bdxc bdxc">百度相册</a></li><li><a href="http://www.wooyun.org/bugs/wooyun-2010-073449#" class="bds_kaixin001 kxw">开心网</a></li><li><a href="http://www.wooyun.org/bugs/wooyun-2010-073449#" class="bds_tqf txpy">腾讯朋友</a></li><li><a href="http://www.wooyun.org/bugs/wooyun-2010-073449#" class="bds_tieba bdtb">百度贴吧</a></li><li><a href="http://www.wooyun.org/bugs/wooyun-2010-073449#" class="bds_douban db">豆瓣网</a></li><li><a href="http://www.wooyun.org/bugs/wooyun-2010-073449#" class="bds_tsohu shwb">搜狐微博</a></li><li><a href="http://www.wooyun.org/bugs/wooyun-2010-073449#" class="bds_bdhome bdhome">百度新首页</a></li><li><a href="http://www.wooyun.org/bugs/wooyun-2010-073449#" class="bds_sqq sqq">QQ好友</a></li><li><a href="http://www.wooyun.org/bugs/wooyun-2010-073449#" class="bds_thx thx">和讯微博</a></li><li><a href="http://www.wooyun.org/bugs/wooyun-2010-073449#" class="bds_more">更多...</a></li></ul><p><a href="http://www.wooyun.org/bugs/wooyun-2010-073449#" class="goWebsite">百度分享</a></p></div></div></div>
+
+<style>
+#myBugListTab { position:relative; display:inline; border:none }
+#myBugList { position:absolute; display:none; margin-left:309px; * margin-left:-60px; * margin-top:18px ; border:#c0c0c0 1px solid; padding:2px 7px; background:#FFF }
+#myBugList li { text-align:left }
+</style>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#myBugListTab").toggle(
+		function(){
+			$("#myBugList").css("display","block");
+		},
+		function(){
+			$("#myBugList").css("display","none");
+		}
+	);
+});
+</script>
+
+	<div class="banner">
+		<div class="logo">
+		<h1>WooYun.org</h1>
+		<div class="weibo"><iframe width="136" height="24" frameborder="0" allowtransparency="true" marginwidth="0" marginheight="0" scrolling="no" border="0" src="./通用型正方教务（通杀各版本）存在注入（不需登陆）+获得webshell+提权内网漫游   WooYun-2014-73449   WooYun.org_files/followbutton.htm"></iframe>
+		</div>
+		<div class="wxewm">
+			<a class="ewmthumb" href="javascript:void(0)"><span><img src="./通用型正方教务（通杀各版本）存在注入（不需登陆）+获得webshell+提权内网漫游   WooYun-2014-73449   WooYun.org_files/ewm.jpg" width="220" border="0"></span><img src="./通用型正方教务（通杀各版本）存在注入（不需登陆）+获得webshell+提权内网漫游   WooYun-2014-73449   WooYun.org_files/weixin_30.png" width="22" border="0"></a>
+		</div>
+		</div>
+		<div class="login">欢迎 <a href="http://www.wooyun.org/whitehats/%E4%B9%90%E4%B9%90%E3%80%81">乐乐、</a> (普通白帽子) | 
+<a href="http://www.wooyun.org/user.php?action=openbugs">对我公开的漏洞</a> | 
+<a id="myBugListTab" href="javascript:void(0)">我的漏洞▼
+</a><ul id="myBugList"><a id="myBugListTab" href="javascript:void(0)">
+</a><li><a id="myBugListTab" href="javascript:void(0)"></a><a href="http://www.wooyun.org/user.php?action=bugs">我发布的</a></li>
+<li><a href="http://www.wooyun.org/user.php?action=attention">我关注的</a></li>
+<li><a href="http://www.wooyun.org/user.php?action=collection">我收藏的</a></li>
+</ul>
+
+ | 
+			<a href="http://www.wooyun.org/user.php?action=sms&do=list">短消息(<b>0</b>)</a> | 
+			<a href="http://www.wooyun.org/user.php?action=update">控制面板</a> | 
+			<a href="http://www.wooyun.org/user.php?action=logout&token=b99353528fbcdb426b5a519c5b01c51d" class="reg">退出</a></div>	</div>
+
+	<div class="nav" id="nav_sc">
+		<ul>
+			<li><a href="http://www.wooyun.org/index.php">首页</a></li>
+			<li><a href="http://www.wooyun.org/corps/">厂商列表</a></li>
+			<li><a href="http://www.wooyun.org/whitehats/">白帽子</a></li>
+            <li><a href="http://www.wooyun.org/teams/">团队</a></li>
+            <li><a href="http://www.wooyun.org/bugs/">漏洞列表</a></li>
+			<li class="new"><a href="http://www.wooyun.org/bug/submit">提交漏洞</a></li>
+			<!--li><a href="/corp_actions">厂商活动</a></li-->
+			<li><a href="http://www.wooyun.org/security_center.php#nav_sc">安全中心</a></li>
+			<li><a href="http://www.wooyun.org/job/">企业招聘</a></li>
+			<li><a href="http://www.wooyun.org/market">乌云集市</a></li>			<li><a href="http://drops.wooyun.org/" target="_blank">知识库</a></li>
+			<li><a href="http://www.wooyun.org/notice/">公告</a></li>
+		</ul>
+        <form action="http://www.wooyun.org/searchbug.php" method="post" id="searchbox">
+            <input type="text" name="q" id="search_input">
+            <input type="submit" value="搜索" id="search_button">
+        </form>
+	</div>
+
+	<div class="bread">
+		<div style="float:left">当前位置：<a href="http://www.wooyun.org/index.php">WooYun</a> &gt;&gt; <a href="http://www.wooyun.org/bugs/wooyun-2010-073449#">漏洞信息</a></div>
+		</div>
+<script language="javascript">
+$(function(){
+    function getParamsOfShareWindow(width, height) {
+        return ['toolbar=0,status=0,resizable=1,width=' + width + ',height=' + height + ',left=',(screen.width-width)/2,',top=',(screen.height-height)/2].join('');
+    }
+});
+
+function AttendBug(id){
+	$.get('/ajaxdo.php',{module:'attendbug',id:id,rid:Math.random(),token:$("#token").val()},function(re){
+		if(re==1){
+			$("#attention_num").html(parseInt($("#attention_num").html())+1);
+			$("#attend_action").html('√已关注 <a class="btn" href="javascript:void(0)" onclick="AttendCancel('+id+')">取消关注</a></span>');
+		}else if(re==2){
+			alert("请先登录");
+		}else if(re==3){
+			alert("已关注此漏洞");
+		}else{
+			alert("操作失败，请与管理员联系");
+		}
+	});
+}
+function AttendCancel(id){
+	if(confirm("确定取消对此漏洞的关注?")){
+		$.get('/ajaxdo.php',{module:'attendcancel',id:id,rid:Math.random(),token:$("#token").val()},function(re){
+			if(re==1){
+				$("#attention_num").html(parseInt($("#attention_num").html())-1);
+				$("#attend_action").html('<a class="btn" href="javascript:void(0)" onclick="AttendBug('+id+')">关注此漏洞</a></span>');
+			}else{
+				alert("操作失败，请与管理员联系");
+			}
+		});
+	}
+}
+
+function CollectBug(id,token){
+	$.get('/ajaxdo.php',{'module':'collect','id':id,'token':token,'rid':Math.random()},function(re){
+		if(re==1){
+			$("#collection_num").html(parseInt($("#collection_num").html())+1);
+			$(".btn-fav").removeClass("fav-add");
+			$(".btn-fav").addClass("fav-cancel");
+			$(".btn-fav").unbind();
+			$(".btn-fav").click(function(){
+					CollectCancel(id,token);	
+				});
+		}else if(re==2){
+			alert("请先登录");
+		}else if(re==3){
+			alert("已收藏此漏洞");
+		}else{
+			alert("操作失败，请与管理员联系");
+		}
+	});
+}
+function CollectCancel(id,token){
+	if(confirm("确定取消对此漏洞的收藏?")){
+		$.get('/ajaxdo.php',{'module':'collectcancel','id':id,'token':token,'rid':Math.random()},function(re){
+			if(re==1){
+				$("#collection_num").html(parseInt($("#collection_num").html())-1);
+				$(".btn-fav").removeClass("fav-cancel");
+				$(".btn-fav").addClass("fav-add");
+				$(".btn-fav").unbind();
+				$(".btn-fav").click(function(){
+					CollectBug(id,token);	
+				});
+			}else{
+				alert("操作失败，请与管理员联系");
+			}
+		});
+	}
+}
+</script>
+
+	<div class="content">
+<input type="hidden" id="token" style="display:none" value="b99353528fbcdb426b5a519c5b01c51d">
+		<h2>漏洞概要 
+						<span style="margin:0 0 0 580px; float:right; position:absolute; font-size:14px; font-weight:normal">关注数(<span id="attention_num">84</span>)
+		 <span id="attend_action">
+		 		 <a class="btn" href="javascript:void(0)" onclick="AttendBug(73449)">关注此漏洞</a></span>
+		 		 </span></h2>
+		
+		<h3>缺陷编号：		<a href="http://www.wooyun.org/bugs/wooyun-2014-073449">WooYun-2014-73449</a>  
+								</h3>
+
+		<h3>漏洞标题：		通用型正方教务（通杀各版本）存在注入（不需登陆）+获得webshell+提权内网漫游  					</h3>
+
+		<h3>相关厂商：		<a href="http://www.wooyun.org/corps/%E6%9D%AD%E5%B7%9E%E6%AD%A3%E6%96%B9">
+														杭州正方														</a>
+		</h3>
+
+		<h3>漏洞作者：		<a href="http://www.wooyun.org/whitehats/sin">sin</a></h3>
+		<h3>提交时间：		2014-08-22 14:04</h3>
+				<h3>漏洞类型：		SQL注射漏洞</h3>
+		
+		<h3>危害等级：		高</h3>
+				<h3>自评Rank：		16</h3>
+				<h3>漏洞状态：		
+																							已交由第三方厂商(cncert国家互联网应急中心)处理
+																								</h3>
+
+		<h3>漏洞来源：		<a href="http://www.wooyun.org/">http://www.wooyun.org</a></h3>
+		<h3>Tags标签：	
+								无
+							
+</h3>
+		<h3>
+		<!-- Baidu Button BEGIN -->
+        <div id="share">
+        	<div style="float:right; margin-right:100px;font-size:12px">
+            <span class="fav-num"><a id="collection_num">6</a>人收藏</span>
+			<a style="text-decoration:none; font-size:12px" href="javascript:void(0)" class="fav-add btn-fav">收藏</a>
+<script type="text/javascript">
+var token="b99353528fbcdb426b5a519c5b01c51d"; 
+var id="73449";
+
+$(".btn-fav").click(function(){ CollectBug(id,token); });
+
+</script>
+			</div>
+            <span style="float:left;">分享漏洞：</span>
+            <div id="bdshare" class="bdshare_b" style="line-height: 12px;"><img src="./通用型正方教务（通杀各版本）存在注入（不需登陆）+获得webshell+提权内网漫游   WooYun-2014-73449   WooYun.org_files/type-button-5.jpg">
+                <a class="shareCount" title="累计分享0次">0</a>
+            </div>
+        </div>
+        <!-- Baidu Button END -->
+    	</h3>
+		<hr align="center">
+
+		<h2>漏洞详情</h2>
+		<h3 class="detailTitle">披露状态：</h3>
+		<p class="detail" style="padding-bottom:0">
+					</p>
+		<p class="detail">
+									2014-08-22：	细节已通知厂商并且等待厂商处理中<br>
+									2014-08-27：	厂商已经确认，细节仅向厂商公开<br>
+									2014-09-06：	细节向核心白帽子及相关领域专家公开<br>
+					</p>
+		<h3 class="detailTitle">简要描述：</h3>
+
+		<p class="detail">某个接口页面存在oracle盲注，可以获得当前用户数据库，dump教师用户表，分析密文加密特征(前人研究成果+基友助攻)，破译加密的密码。前台管理员登陆，后台文件上传基于黑名单原理，过滤u完全，上传特定文件，生成一句话。菜刀连接，大马提权。</p>
+
+				
+						<h3 class="detailTitle">详细说明：</h3>
+		
+			<p class="detail"></p><p class="detail"><a href="./通用型正方教务（通杀各版本）存在注入（不需登陆）+获得webshell+提权内网漫游   WooYun-2014-73449   WooYun.org_files/22112316e35bf87f996af3031661b8caac849e2f.jpg" target="_blank"><img src="./通用型正方教务（通杀各版本）存在注入（不需登陆）+获得webshell+提权内网漫游   WooYun-2014-73449   WooYun.org_files/22112316e35bf87f996af3031661b8caac849e2f.jpg" alt="1.jpg" width="600"></a></p><p class="detail"><br>
+
+<br>
+百度搜索：“欢迎使用正方教务管理系统!请登录”  可获得几十页的词条。足见其通用。<br>
+
+<br>
+存在注入点的页面为http://域名（ip）/xsxjxtdl.aspx<br>
+
+<br>
+随便找个例子，做演示。<br>
+
+<br>
+</p><p class="detail"><a href="./通用型正方教务（通杀各版本）存在注入（不需登陆）+获得webshell+提权内网漫游   WooYun-2014-73449   WooYun.org_files/22112721830eea059a70133dcb61712334c46c38.jpg" target="_blank"><img src="./通用型正方教务（通杀各版本）存在注入（不需登陆）+获得webshell+提权内网漫游   WooYun-2014-73449   WooYun.org_files/22112721830eea059a70133dcb61712334c46c38.jpg" alt="2.jpg" width="600"></a></p><p class="detail"><br>
+
+<br>
+通过burp suite拦截，然后sqlmap加载进行post注入。<br>
+
+<br>
+</p><p class="detail"><a href="./通用型正方教务（通杀各版本）存在注入（不需登陆）+获得webshell+提权内网漫游   WooYun-2014-73449   WooYun.org_files/22113348145b9ad13cde6e4db1a1e2938b6711a2.jpg" target="_blank"><img src="./通用型正方教务（通杀各版本）存在注入（不需登陆）+获得webshell+提权内网漫游   WooYun-2014-73449   WooYun.org_files/22113348145b9ad13cde6e4db1a1e2938b6711a2.jpg" alt="3.jpg" width="600"></a></p><p class="detail"><br>
+
+<br>
+<br>
+
+<br>
+ </p>
+				
+									<h3 class="detailTitle">漏洞证明：</h3>
+
+			<p class="detail"></p><p class="detail"><a href="./通用型正方教务（通杀各版本）存在注入（不需登陆）+获得webshell+提权内网漫游   WooYun-2014-73449   WooYun.org_files/22114218dec2c8df8b1e7a5b842d384d252a2d10.jpg" target="_blank"><img src="./通用型正方教务（通杀各版本）存在注入（不需登陆）+获得webshell+提权内网漫游   WooYun-2014-73449   WooYun.org_files/22114218dec2c8df8b1e7a5b842d384d252a2d10.jpg" alt="4.jpg" width="600"></a></p><p class="detail"><br>
+
+<br>
+</p><p class="detail"><a href="./通用型正方教务（通杀各版本）存在注入（不需登陆）+获得webshell+提权内网漫游   WooYun-2014-73449   WooYun.org_files/2211422748d455ad82360c0fd255afb7e8dfb147.jpg" target="_blank"><img src="./通用型正方教务（通杀各版本）存在注入（不需登陆）+获得webshell+提权内网漫游   WooYun-2014-73449   WooYun.org_files/2211422748d455ad82360c0fd255afb7e8dfb147.jpg" alt="5.jpg" width="600"></a></p><p class="detail"><br>
+
+<br>
+确定存在注入，为oracle的时间盲注（复现时可能比较纠结，时间可以加大一点，一次跑不出，可以跑2次），一般人可能到此就放弃了，但是像我们比较笨的人，只有更努力一点了。不幸中的万幸，前辈们开拓的很深入（致敬），正方的数据库结构已经很明了了。用户密码加密方式，乌云知识库也有讨论。<br>
+
+<br>
+ps：①数据库结构： <a target="_blank" href="http://www.wooyun.org/bugs/wooyun-2012-010453">WooYun: 69个高校正方教务管理系统数据库任意操作</a> （向2位师兄致敬）<br>
+
+<br>
+    ②加密方式：http://drops.wooyun.org/tips/847<br>
+
+<br>
+                <a target="_blank" href="http://www.wooyun.org/bugs/wooyun-2012-08283">WooYun: 方正教务系统sql注射</a> <br>
+
+<br>
+一般可以用--sql-shell进行快速提取（oracle权限分配比较死，权限比较低）。切正方如果默认数据库名改变，跑不出表的。<br>
+
+<br>
+select YHM,KL from "YHB" where YHM like 'jw%';<br>
+
+<br>
+权限高的可以，直接dump了。<br>
+
+<br>
+-D ZFXFZB -T YHB -C “yhm,kl” --start 1 --start 50<br>
+
+<br>
+</p><p class="detail"><a href="./通用型正方教务（通杀各版本）存在注入（不需登陆）+获得webshell+提权内网漫游   WooYun-2014-73449   WooYun.org_files/221307073140e670a9ec2812d292a4f77d135697.jpg" target="_blank"><img src="./通用型正方教务（通杀各版本）存在注入（不需登陆）+获得webshell+提权内网漫游   WooYun-2014-73449   WooYun.org_files/221307073140e670a9ec2812d292a4f77d135697.jpg" alt="6.1.jpg" width="600"></a></p><p class="detail"><br>
+
+<br>
+会得到一些，用户名和密码。（配合社工效果更佳，搞到管理员和老师的账号应该不是很难）<br>
+
+<br>
+</p><p class="detail"><a href="./通用型正方教务（通杀各版本）存在注入（不需登陆）+获得webshell+提权内网漫游   WooYun-2014-73449   WooYun.org_files/2213132636e1760e153d682a8ccfc7688f0e3553.jpg" target="_blank"><img src="./通用型正方教务（通杀各版本）存在注入（不需登陆）+获得webshell+提权内网漫游   WooYun-2014-73449   WooYun.org_files/2213132636e1760e153d682a8ccfc7688f0e3553.jpg" alt="7.jpg" width="600"></a></p><p class="detail"><br>
+
+<br>
+接下来，又是一个很苦逼的活。知道账号，密码很难解出来，只有试探弱密码，好在很多老师账号密码一致。这里要感谢基友彗星的全力助攻。根据乌云知识库的原理，写出了软件。<br>
+
+<br>
+</p><p class="detail"><a href="./通用型正方教务（通杀各版本）存在注入（不需登陆）+获得webshell+提权内网漫游   WooYun-2014-73449   WooYun.org_files/2213212367654636b48abf020d7f25ce535e4dac.jpg" target="_blank"><img src="./通用型正方教务（通杀各版本）存在注入（不需登陆）+获得webshell+提权内网漫游   WooYun-2014-73449   WooYun.org_files/2213212367654636b48abf020d7f25ce535e4dac.jpg" alt="8.1.jpg" width="600"></a></p><p class="detail"><br>
+
+<br>
+</p><p class="detail"><a href="./通用型正方教务（通杀各版本）存在注入（不需登陆）+获得webshell+提权内网漫游   WooYun-2014-73449   WooYun.org_files/221321338011b1ace0d8df7a21547eb7780f43e1.jpg" target="_blank"><img src="./通用型正方教务（通杀各版本）存在注入（不需登陆）+获得webshell+提权内网漫游   WooYun-2014-73449   WooYun.org_files/221321338011b1ace0d8df7a21547eb7780f43e1.jpg" alt="8.3.jpg" width="600"></a></p><p class="detail"><br>
+
+<br>
+</p><p class="detail"><a href="./通用型正方教务（通杀各版本）存在注入（不需登陆）+获得webshell+提权内网漫游   WooYun-2014-73449   WooYun.org_files/221321411455cb9cfaad4642a5246226d00c1868.jpg" target="_blank"><img src="./通用型正方教务（通杀各版本）存在注入（不需登陆）+获得webshell+提权内网漫游   WooYun-2014-73449   WooYun.org_files/221321411455cb9cfaad4642a5246226d00c1868.jpg" alt="8.jpg" width="600"></a></p><p class="detail"><br>
+
+<br>
+基友说，凭借小学英语和运气的组合，终于搞出了key。<br>
+
+<br>
+然后，然后...发现乌云已经有人爆出了key。<br>
+
+<br>
+依稀记得当时的感觉,就像千万只小学生中从心中奔腾而过。：(<br>
+
+<br>
+好，接下来。进管理后台，拿webshell。后台过滤的还是蛮严格的。<br>
+
+<br>
+asp.aspx.asa.1.asp;.jpg等等...均失败<br>
+
+<br>
+然后灵光一闪，以前貌似看过ashx可以.net中生成一句话的。<br>
+
+<br>
+于是：<br>
+
+<br>
+</p><p class="detail"><a href="./通用型正方教务（通杀各版本）存在注入（不需登陆）+获得webshell+提权内网漫游   WooYun-2014-73449   WooYun.org_files/22133256c1b99de3af13aa75f27f0295e4543cc3.jpg" target="_blank"><img src="./通用型正方教务（通杀各版本）存在注入（不需登陆）+获得webshell+提权内网漫游   WooYun-2014-73449   WooYun.org_files/22133256c1b99de3af13aa75f27f0295e4543cc3.jpg" alt="9.jpg" width="600"></a></p><p class="detail"><br>
+
+<br>
+</p><p class="detail"><a href="./通用型正方教务（通杀各版本）存在注入（不需登陆）+获得webshell+提权内网漫游   WooYun-2014-73449   WooYun.org_files/22133315d2b5f4064982c2789afd64a5fd9c7f3a.jpg" target="_blank"><img src="./通用型正方教务（通杀各版本）存在注入（不需登陆）+获得webshell+提权内网漫游   WooYun-2014-73449   WooYun.org_files/22133315d2b5f4064982c2789afd64a5fd9c7f3a.jpg" alt="10.jpg" width="600"></a></p><p class="detail"><br>
+
+<br>
+以免有的同学，友情监测，还是打码为好。<br>
+
+<br>
+</p><p class="detail"><a href="./通用型正方教务（通杀各版本）存在注入（不需登陆）+获得webshell+提权内网漫游   WooYun-2014-73449   WooYun.org_files/22133958e706055371471a85ad2bd2aee472b1d1.jpg" target="_blank"><img src="./通用型正方教务（通杀各版本）存在注入（不需登陆）+获得webshell+提权内网漫游   WooYun-2014-73449   WooYun.org_files/22133958e706055371471a85ad2bd2aee472b1d1.jpg" alt="12.jpg" width="600"></a></p><p class="detail"><br>
+
+<br>
+学校机器一般年老失修，，，提权简直是so easy。<br>
+
+<br>
+然后读出，管理密码。<br>
+
+<br>
+嗯，大家猜对了，教务管理的密码惊人的一致。减少了一些提权之繁琐。<br>
+
+<br>
+上传图片太痛苦了，so卡，就不上图了（不知是乌云的问题还是我的网速问题）。<br>
+
+<br>
+罗里吧嗦的说了这么多，其实就是锲而不舍，才能达到最后，也没什么特别的。<br>
+
+<br>
+<br>
+
+<br>
+ </p>
+
+									<h3 class="detailTitle">修复方案：</h3>
+			<p class="detail">修复的话：①页面做好过滤，参数化传入，防止注入<br>
+
+<br>
+         ②后台上传也要过滤好。<br>
+
+<br>
+         ③再就是校方，软件及时更新，教师密码安全普及一下。服务器上安全狗什么的，不要总是清一色的360安全卫士。（安装360最近的服务器管家也好，360大哥我错了，不要打我） </p>
+										<h3 class="detailTitle">版权声明：转载请注明来源 <a style="font-weight:normal" href="http://www.wooyun.org/whitehats/sin" title="sin">sin</a>@<a style="font-weight:normal" href="./通用型正方教务（通杀各版本）存在注入（不需登陆）+获得webshell+提权内网漫游   WooYun-2014-73449   WooYun.org_files/通用型正方教务（通杀各版本）存在注入（不需登陆）+获得webshell+提权内网漫游   WooYun-2014-73449   WooYun.org.htm" title="通用型正方教务（通杀各版本）存在注入（不需登陆）+获得webshell+提权内网漫游">乌云</a></h3>
+		<hr align="center">
+
+				
+			<h2 id="bugreply">漏洞回应</h2>
+			
+			
+															<h3 class="detailTitle">厂商回应：</h3>
+						<p class="detail">危害等级：高</p>
+						<p class="detail">漏洞Rank：20 </p>
+													<p class="detail">确认时间：2014-08-27 10:15</p>
+												<h3 class="detailTitle">厂商回复：</h3>				
+						<p class="detail">CNVD确认所述情况，未完全复现（确认第一层风险），已经根据以往建立的邮箱联系渠道向软件生产厂商通报。</p>
+					
+
+					
+					
+					<h3 class="detailTitle">最新状态：</h3>
+
+											<p class="detail">暂无</p>
+					
+
+							
+					
+		
+<hr align="center">
+<script type="text/javascript">
+var bugid="73449";
+var bugRating="-3";
+var myRating="";
+var ratingCount="0";
+
+
+
+function ShowBugRating(k){
+	var ratingItems=$(".myrating span");
+	$.each(ratingItems,function(i,n){
+		var nk=parseInt($(n).attr("rel"));
+		if(nk<=k){
+			$(n).addClass("on");
+		}else{
+			$(n).removeClass("on");
+		}
+	});
+	$(".myrating span").hover(
+		function(){
+			$("#ratingShow").html($(this).attr("data-title"));
+		},
+		function(){
+			$("#ratingShow").html("");
+		}
+	);
+}
+$(document).ready(function(){
+	if(myRating==""){
+		var ratingItems=$(".myrating span");
+		$(".myrating span").hover(
+			function(){
+				$(this).addClass("hover");
+				var k=parseInt($(this).attr("rel"));
+				$.each(ratingItems,function(i,n){
+					var nk=parseInt($(n).attr("rel"));
+					if(nk<k) $(n).addClass("on");
+					if(nk>k) $(n).removeClass("on");
+				});
+				$("#ratingShow").html($(this).attr("data-title"));
+			},
+			function(){
+				$(this).removeClass("hover");
+				if($("#myRating").val()==""){
+					$.each(ratingItems,function(i,n){
+						$(n).removeClass("on");
+					});
+				}
+				$("#ratingShow").html("");
+			}
+		);
+
+		$(".myrating span").click(function(){
+			var rating=$(this).attr("rel");
+			var k=parseInt($(this).attr("rel"));
+			$.post("/ajaxdo.php?module=bugrating",{"id":bugid,"rating":rating,"token":$("#token").val()},function(re){
+				//消除操作绑定
+				$(".myrating span").unbind();
+				re=parseInt(re);
+				switch(re){
+					case 1:
+						$("#ratingShow").html("评分成功");
+						$("#ratingSpan").html(parseInt($("#ratingSpan").html())+1);
+						$.each(ratingItems,function(i,n){
+							var nk=parseInt($(n).attr("rel"));
+							if(nk<=k){
+								$(n).addClass("on");
+							}else{
+								$(n).removeClass("on");
+							}
+						});
+						ShowBugRating(rating);
+						break;
+					case 2:
+						$("#ratingShow").html("请先登录");
+						break;
+					case 4:
+						$("#ratingShow").html("已对此漏洞进行过评分");
+						break;
+					case 6:
+						$("#ratingShow").html("不能对自己发布的漏洞进行评分");
+						break;
+					default:break;
+				}
+			});
+		});
+	}else{
+		if(ratingCount>2){
+			ShowBugRating(bugRating);
+		}else{
+			ShowBugRating(-3);
+		}
+	}
+});
+
+</script>
+<h3 class="detailTitle">漏洞评价：</h3>
+<p class="detail">对本漏洞信息进行评价，以更好的反馈信息的价值，包括信息客观性，内容是否完整以及是否具备学习价值</p>
+		<h5 class="rating">
+		<div class="ratingText">漏洞评价<span>(共<span id="ratingSpan">0</span>人评价)</span>:</div>
+		<div class="myrating">
+			<span rel="-2" data-title="信息虚假或者没有任何自己的思考"></span>
+			<span rel="-1" data-title="内容不详并且漏洞信息评级及类型明显错误"></span>
+			<span rel="0" data-title="还可以，洞主继续努力"></span>
+			<span rel="1" data-title="信息完整，过程清晰，有截图有代码有视频有真相"></span>
+			<span rel="2" data-title="角度独特思路新颖值得学习"></span>
+			<div id="ratingShow">
+						</div>
+		</div>
+		</h5>
+		<input type="hidden" id="myRating" value="">
+
+<hr align="center">
+<h2>评论</h2>
+
+<div class="replys">
+	    <ol class="replylist">
+                <li class="reply clearfix">
+            <div class="reply-content">
+                <div class="reply-info">
+        <span class="addtime">2014-08-22 14:11</span> |
+    		<a target="_blank" href="http://www.wooyun.org/whitehats/%E6%BC%AB%E6%AD%A5%E4%BA%91%E7%AB%AF">漫步云端</a> 
+			<!-- 增加路人判断显示 @zm 2013-12-13 Begin -->
+			( 普通白帽子  |			<!-- 增加路人判断显示 @zm 2013-12-13 End -->
+        Rank:192 漏洞数:29        | I'm Ramble!)
+	
+	<div class="likebox">
+        <span class="likepre" title="赞！" rel="107828"></span>
+        <span class="liketext liketext_min"><span id="likenum_107828">0</span></span>
+        <span class="likesuf"></span>
+    </div>
+                </div><!-- reply-info End -->
+
+                <div class="description">
+                    <p>我是来看正方的~ </p>
+                </div>
+
+                <div class="replylist-act">
+                		<span class="floor">1#</span>
+                        <a title="回复 漫步云端" href="javascript:void(0)" class="replyBtn" onclick="Reply(&#39;漫步云端&#39;)">回复此人</a>
+                </div>
+            </div><!-- reply-content End -->
+        </li>
+                <li class="reply clearfix">
+            <div class="reply-content">
+                <div class="reply-info">
+        <span class="addtime">2014-08-22 14:13</span> |
+    		<a target="_blank" href="http://www.wooyun.org/whitehats/%E5%A4%A9%E5%9C%B0%E4%B8%8D%E4%BB%81%20%E4%BB%A5%E4%B8%87%E7%89%A9%E4%B8%BA%E5%88%8D%E7%8B%97">天地不仁 以万物为刍狗</a> 
+			<!-- 增加路人判断显示 @zm 2013-12-13 Begin -->
+			( 路人 |			<!-- 增加路人判断显示 @zm 2013-12-13 End -->
+        Rank:5 漏洞数:1        | 如果  可以  即使  为你  黑了  全世界   ...)
+	
+	<div class="likebox">
+        <span class="likepre" title="赞！" rel="107829"></span>
+        <span class="liketext liketext_min"><span id="likenum_107829">0</span></span>
+        <span class="likesuf"></span>
+    </div>
+                </div><!-- reply-info End -->
+
+                <div class="description">
+                    <p>前排   带我装逼 带我飞   CCAV 给个特写   </p>
+                </div>
+
+                <div class="replylist-act">
+                		<span class="floor">2#</span>
+                        <a title="回复 天地不仁 以万物为刍狗" href="javascript:void(0)" class="replyBtn" onclick="Reply(&#39;天地不仁 以万物为刍狗&#39;)">回复此人</a>
+                </div>
+            </div><!-- reply-content End -->
+        </li>
+                <li class="reply clearfix">
+            <div class="reply-content">
+                <div class="reply-info">
+        <span class="addtime">2014-08-22 14:16</span> |
+    		<a target="_blank" href="http://www.wooyun.org/whitehats/%E7%8E%89%E6%9E%97%E5%98%8E">玉林嘎</a> 
+			<!-- 增加路人判断显示 @zm 2013-12-13 Begin -->
+			( 实习白帽子  |			<!-- 增加路人判断显示 @zm 2013-12-13 End -->
+        Rank:39 漏洞数:15        )
+	
+	<div class="likebox">
+        <span class="likepre" title="赞！" rel="107830"></span>
+        <span class="liketext liketext_min"><span id="likenum_107830">0</span></span>
+        <span class="likesuf"></span>
+    </div>
+                </div><!-- reply-info End -->
+
+                <div class="description">
+                    <p>第一次那么前排 </p>
+                </div>
+
+                <div class="replylist-act">
+                		<span class="floor">3#</span>
+                        <a title="回复 玉林嘎" href="javascript:void(0)" class="replyBtn" onclick="Reply(&#39;玉林嘎&#39;)">回复此人</a>
+                </div>
+            </div><!-- reply-content End -->
+        </li>
+                <li class="reply clearfix">
+            <div class="reply-content">
+                <div class="reply-info">
+        <span class="addtime">2014-08-22 14:18</span> |
+    		<a target="_blank" href="http://www.wooyun.org/whitehats/pandas">pandas</a> 
+			<!-- 增加路人判断显示 @zm 2013-12-13 Begin -->
+			( 普通白帽子  |			<!-- 增加路人判断显示 @zm 2013-12-13 End -->
+        Rank:264 漏洞数:33        | 国家一级保护动物)
+	
+	<div class="likebox">
+        <span class="likepre" title="赞！" rel="107832"></span>
+        <span class="liketext liketext_min"><span id="likenum_107832">0</span></span>
+        <span class="likesuf"></span>
+    </div>
+                </div><!-- reply-info End -->
+
+                <div class="description">
+                    <p>好腻害 </p>
+                </div>
+
+                <div class="replylist-act">
+                		<span class="floor">4#</span>
+                        <a title="回复 pandas" href="javascript:void(0)" class="replyBtn" onclick="Reply(&#39;pandas&#39;)">回复此人</a>
+                </div>
+            </div><!-- reply-content End -->
+        </li>
+                <li class="reply clearfix">
+            <div class="reply-content">
+                <div class="reply-info">
+        <span class="addtime">2014-08-22 14:26</span> |
+    		<a target="_blank" href="http://www.wooyun.org/whitehats/%E5%8A%A8%E5%90%8E%E6%B2%B3">动后河</a> 
+			<!-- 增加路人判断显示 @zm 2013-12-13 Begin -->
+			( 路人 |			<!-- 增加路人判断显示 @zm 2013-12-13 End -->
+        Rank:17 漏洞数:4        | vim只需要一只脚踏板)
+	
+	<div class="likebox">
+        <span class="likepre" title="赞！" rel="107834"></span>
+        <span class="liketext liketext_min"><span id="likenum_107834">0</span></span>
+        <span class="likesuf"></span>
+    </div>
+                </div><!-- reply-info End -->
+
+                <div class="description">
+                    <p>太天真了，居然加了“通用型”三个字 </p>
+                </div>
+
+                <div class="replylist-act">
+                		<span class="floor">5#</span>
+                        <a title="回复 动后河" href="javascript:void(0)" class="replyBtn" onclick="Reply(&#39;动后河&#39;)">回复此人</a>
+                </div>
+            </div><!-- reply-content End -->
+        </li>
+                <li class="reply clearfix">
+            <div class="reply-content">
+                <div class="reply-info">
+        <span class="addtime">2014-08-22 14:27</span> |
+    		<a target="_blank" href="http://www.wooyun.org/whitehats/%E7%B4%AB%E8%A1%A3%E5%A4%A7%E4%BE%A0">紫衣大侠</a> 
+			<!-- 增加路人判断显示 @zm 2013-12-13 Begin -->
+			( 普通白帽子  |			<!-- 增加路人判断显示 @zm 2013-12-13 End -->
+        Rank:149 漏洞数:15        | 愿结天下有识之士)
+	
+	<div class="likebox">
+        <span class="likepre" title="赞！" rel="107835"></span>
+        <span class="liketext liketext_min"><span id="likenum_107835">0</span></span>
+        <span class="likesuf"></span>
+    </div>
+                </div><!-- reply-info End -->
+
+                <div class="description">
+                    <p>前排会火~~ </p>
+                </div>
+
+                <div class="replylist-act">
+                		<span class="floor">6#</span>
+                        <a title="回复 紫衣大侠" href="javascript:void(0)" class="replyBtn" onclick="Reply(&#39;紫衣大侠&#39;)">回复此人</a>
+                </div>
+            </div><!-- reply-content End -->
+        </li>
+                <li class="reply clearfix">
+            <div class="reply-content">
+                <div class="reply-info">
+        <span class="addtime">2014-08-22 14:29</span> |
+    		<a target="_blank" href="http://www.wooyun.org/whitehats/1angxi">1angxi</a> 
+			<!-- 增加路人判断显示 @zm 2013-12-13 Begin -->
+			( 路人 |			<!-- 增加路人判断显示 @zm 2013-12-13 End -->
+        Rank:2 漏洞数:1        | 研究僧，安全新手，我只是来打酱油的...)
+	
+	<div class="likebox">
+        <span class="likepre" title="赞！" rel="107836"></span>
+        <span class="liketext liketext_min"><span id="likenum_107836">0</span></span>
+        <span class="likesuf"></span>
+    </div>
+                </div><!-- reply-info End -->
+
+                <div class="description">
+                    <p>这么像我前两天发的那个洞。。。坐等公开 </p>
+                </div>
+
+                <div class="replylist-act">
+                		<span class="floor">7#</span>
+                        <a title="回复 1angxi" href="javascript:void(0)" class="replyBtn" onclick="Reply(&#39;1angxi&#39;)">回复此人</a>
+                </div>
+            </div><!-- reply-content End -->
+        </li>
+                <li class="reply clearfix">
+            <div class="reply-content">
+                <div class="reply-info">
+        <span class="addtime">2014-08-22 14:29</span> |
+    		<a target="_blank" href="http://www.wooyun.org/whitehats/scanf">scanf</a> 
+			<!-- 增加路人判断显示 @zm 2013-12-13 Begin -->
+			( 普通白帽子  |			<!-- 增加路人判断显示 @zm 2013-12-13 End -->
+        Rank:429 漏洞数:91        | 学习.)
+	
+	<div class="likebox">
+        <span class="likepre" title="赞！" rel="107837"></span>
+        <span class="liketext liketext_min"><span id="likenum_107837">0</span></span>
+        <span class="likesuf"></span>
+    </div>
+                </div><!-- reply-info End -->
+
+                <div class="description">
+                    <p>我是来看正方的~ </p>
+                </div>
+
+                <div class="replylist-act">
+                		<span class="floor">8#</span>
+                        <a title="回复 scanf" href="javascript:void(0)" class="replyBtn" onclick="Reply(&#39;scanf&#39;)">回复此人</a>
+                </div>
+            </div><!-- reply-content End -->
+        </li>
+                <li class="reply clearfix">
+            <div class="reply-content">
+                <div class="reply-info">
+        <span class="addtime">2014-08-22 17:25</span> |
+    		<a target="_blank" href="http://www.wooyun.org/whitehats/wellsun">wellsun</a> 
+			<!-- 增加路人判断显示 @zm 2013-12-13 Begin -->
+			( 路人 |			<!-- 增加路人判断显示 @zm 2013-12-13 End -->
+        Rank:0 漏洞数:1        | www.wellsun.com)
+	
+	<div class="likebox">
+        <span class="likepre" title="赞！" rel="107848"></span>
+        <span class="liketext liketext_min"><span id="likenum_107848">0</span></span>
+        <span class="likesuf"></span>
+    </div>
+                </div><!-- reply-info End -->
+
+                <div class="description">
+                    <p>哥们现在正方的加密是什么方式？求交流，Q  7520024 </p>
+                </div>
+
+                <div class="replylist-act">
+                		<span class="floor">9#</span>
+                        <a title="回复 wellsun" href="javascript:void(0)" class="replyBtn" onclick="Reply(&#39;wellsun&#39;)">回复此人</a>
+                </div>
+            </div><!-- reply-content End -->
+        </li>
+                <li class="reply clearfix">
+            <div class="reply-content">
+                <div class="reply-info">
+        <span class="addtime">2014-08-22 17:35</span> |
+    		<a target="_blank" href="http://www.wooyun.org/whitehats/%E5%A4%A7%E5%A4%A7%E7%81%B0%E7%8B%BC">大大灰狼</a> 
+			<!-- 增加路人判断显示 @zm 2013-12-13 Begin -->
+			( 普通白帽子  |			<!-- 增加路人判断显示 @zm 2013-12-13 End -->
+        Rank:147 漏洞数:30        | %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%)
+	
+	<div class="likebox">
+        <span class="likepre" title="赞！" rel="107852"></span>
+        <span class="liketext liketext_min"><span id="likenum_107852">0</span></span>
+        <span class="likesuf"></span>
+    </div>
+                </div><!-- reply-info End -->
+
+                <div class="description">
+                    <p>帮我改成绩 </p>
+                </div>
+
+                <div class="replylist-act">
+                		<span class="floor">10#</span>
+                        <a title="回复 大大灰狼" href="javascript:void(0)" class="replyBtn" onclick="Reply(&#39;大大灰狼&#39;)">回复此人</a>
+                </div>
+            </div><!-- reply-content End -->
+        </li>
+                <li class="reply clearfix">
+            <div class="reply-content">
+                <div class="reply-info">
+        <span class="addtime">2014-08-22 17:53</span> |
+    		<a target="_blank" href="http://www.wooyun.org/whitehats/milk">milk</a> 
+			<!-- 增加路人判断显示 @zm 2013-12-13 Begin -->
+			( 路人 |			<!-- 增加路人判断显示 @zm 2013-12-13 End -->
+        Rank:21 漏洞数:5        | 美女，你肥皂掉了)
+	
+	<div class="likebox">
+        <span class="likepre" title="赞！" rel="107856"></span>
+        <span class="liketext liketext_min"><span id="likenum_107856">0</span></span>
+        <span class="likesuf"></span>
+    </div>
+                </div><!-- reply-info End -->
+
+                <div class="description">
+                    <p>不知道我们山村里那个小学有没有这个系统，要是有的话，帮我改成绩可好？ </p>
+                </div>
+
+                <div class="replylist-act">
+                		<span class="floor">11#</span>
+                        <a title="回复 milk" href="javascript:void(0)" class="replyBtn" onclick="Reply(&#39;milk&#39;)">回复此人</a>
+                </div>
+            </div><!-- reply-content End -->
+        </li>
+                <li class="reply clearfix">
+            <div class="reply-content">
+                <div class="reply-info">
+        <span class="addtime">2014-08-22 17:55</span> |
+    		<a target="_blank" href="http://www.wooyun.org/whitehats/chock">chock</a> 
+			<!-- 增加路人判断显示 @zm 2013-12-13 Begin -->
+			( 路人 |			<!-- 增加路人判断显示 @zm 2013-12-13 End -->
+        Rank:4 漏洞数:5        | 渣渣)
+	
+	<div class="likebox">
+        <span class="likepre" title="赞！" rel="107858"></span>
+        <span class="liketext liketext_min"><span id="likenum_107858">0</span></span>
+        <span class="likesuf"></span>
+    </div>
+                </div><!-- reply-info End -->
+
+                <div class="description">
+                    <p>sin你好，cos呢？ </p>
+                </div>
+
+                <div class="replylist-act">
+                		<span class="floor">12#</span>
+                        <a title="回复 chock" href="javascript:void(0)" class="replyBtn" onclick="Reply(&#39;chock&#39;)">回复此人</a>
+                </div>
+            </div><!-- reply-content End -->
+        </li>
+                <li class="reply clearfix">
+            <div class="reply-content">
+                <div class="reply-info">
+        <span class="addtime">2014-08-22 18:00</span> |
+    		<a target="_blank" href="http://www.wooyun.org/whitehats/scanf">scanf</a> 
+			<!-- 增加路人判断显示 @zm 2013-12-13 Begin -->
+			( 普通白帽子  |			<!-- 增加路人判断显示 @zm 2013-12-13 End -->
+        Rank:429 漏洞数:91        | 学习.)
+	
+	<div class="likebox">
+        <span class="likepre" title="赞！" rel="107860"></span>
+        <span class="liketext liketext_min"><span id="likenum_107860">0</span></span>
+        <span class="likesuf"></span>
+    </div>
+                </div><!-- reply-info End -->
+
+                <div class="description">
+                    <p>不知道读大学的时候,方正还在用没有 </p>
+                </div>
+
+                <div class="replylist-act">
+                		<span class="floor">13#</span>
+                        <a title="回复 scanf" href="javascript:void(0)" class="replyBtn" onclick="Reply(&#39;scanf&#39;)">回复此人</a>
+                </div>
+            </div><!-- reply-content End -->
+        </li>
+                <li class="reply clearfix">
+            <div class="reply-content">
+                <div class="reply-info">
+        <span class="addtime">2014-08-22 18:04</span> |
+    		<a target="_blank" href="http://www.wooyun.org/whitehats/reality0ne">reality0ne</a> 
+			<!-- 增加路人判断显示 @zm 2013-12-13 Begin -->
+			( 路人 |			<!-- 增加路人判断显示 @zm 2013-12-13 End -->
+        Rank:12 漏洞数:6        )
+	
+	<div class="likebox">
+        <span class="likepre" title="赞！" rel="107862"></span>
+        <span class="liketext liketext_min"><span id="likenum_107862">0</span></span>
+        <span class="likesuf"></span>
+    </div>
+                </div><!-- reply-info End -->
+
+                <div class="description">
+                    <p>新版改成md5了。。 </p>
+                </div>
+
+                <div class="replylist-act">
+                		<span class="floor">14#</span>
+                        <a title="回复 reality0ne" href="javascript:void(0)" class="replyBtn" onclick="Reply(&#39;reality0ne&#39;)">回复此人</a>
+                </div>
+            </div><!-- reply-content End -->
+        </li>
+                <li class="reply clearfix">
+            <div class="reply-content">
+                <div class="reply-info">
+        <span class="addtime">2014-08-22 18:26</span> |
+    		<a target="_blank" href="http://www.wooyun.org/whitehats/scanf">scanf</a> 
+			<!-- 增加路人判断显示 @zm 2013-12-13 Begin -->
+			( 普通白帽子  |			<!-- 增加路人判断显示 @zm 2013-12-13 End -->
+        Rank:429 漏洞数:91        | 学习.)
+	
+	<div class="likebox">
+        <span class="likepre" title="赞！" rel="107866"></span>
+        <span class="liketext liketext_min"><span id="likenum_107866">0</span></span>
+        <span class="likesuf"></span>
+    </div>
+                </div><!-- reply-info End -->
+
+                <div class="description">
+                    <p>@reality0ne 那不方便我们了吗？
+哈哈哈 </p>
+                </div>
+
+                <div class="replylist-act">
+                		<span class="floor">15#</span>
+                        <a title="回复 scanf" href="javascript:void(0)" class="replyBtn" onclick="Reply(&#39;scanf&#39;)">回复此人</a>
+                </div>
+            </div><!-- reply-content End -->
+        </li>
+                <li class="reply clearfix">
+            <div class="reply-content">
+                <div class="reply-info">
+        <span class="addtime">2014-08-22 20:42</span> |
+    		<a target="_blank" href="http://www.wooyun.org/whitehats/%E5%A4%8F%E6%AE%87">夏殇</a> 
+			<!-- 增加路人判断显示 @zm 2013-12-13 Begin -->
+			( 路人 |			<!-- 增加路人判断显示 @zm 2013-12-13 End -->
+        Rank:8 漏洞数:8        | THE QUIETER YOU BECOME, THE MORE YOU ARE...)
+	
+	<div class="likebox">
+        <span class="likepre" title="赞！" rel="107877"></span>
+        <span class="liketext liketext_min"><span id="likenum_107877">0</span></span>
+        <span class="likesuf"></span>
+    </div>
+                </div><!-- reply-info End -->
+
+                <div class="description">
+                    <p>这个，求细节 </p>
+                </div>
+
+                <div class="replylist-act">
+                		<span class="floor">16#</span>
+                        <a title="回复 夏殇" href="javascript:void(0)" class="replyBtn" onclick="Reply(&#39;夏殇&#39;)">回复此人</a>
+                </div>
+            </div><!-- reply-content End -->
+        </li>
+                <li class="reply clearfix">
+            <div class="reply-content">
+                <div class="reply-info">
+        <span class="addtime">2014-08-23 11:17</span> |
+    		<a target="_blank" href="http://www.wooyun.org/whitehats/error">error</a> 
+			<!-- 增加路人判断显示 @zm 2013-12-13 Begin -->
+			( 路人 |			<!-- 增加路人判断显示 @zm 2013-12-13 End -->
+        Rank:2 漏洞数:4        | 500 Internal Server Error)
+	
+	<div class="likebox">
+        <span class="likepre" title="赞！" rel="107911"></span>
+        <span class="liketext liketext_min"><span id="likenum_107911">0</span></span>
+        <span class="likesuf"></span>
+    </div>
+                </div><!-- reply-info End -->
+
+                <div class="description">
+                    <p>通杀各版本肯定不信!新版加密使用oracle自带加密函数，你能破才叫叼；后台倒是可以上传ashx马 </p>
+                </div>
+
+                <div class="replylist-act">
+                		<span class="floor">17#</span>
+                        <a title="回复 error" href="javascript:void(0)" class="replyBtn" onclick="Reply(&#39;error&#39;)">回复此人</a>
+                </div>
+            </div><!-- reply-content End -->
+        </li>
+                <li class="reply clearfix">
+            <div class="reply-content">
+                <div class="reply-info">
+        <span class="addtime">2014-08-24 19:12</span> |
+    		<a target="_blank" href="http://www.wooyun.org/whitehats/wellsun">wellsun</a> 
+			<!-- 增加路人判断显示 @zm 2013-12-13 Begin -->
+			( 路人 |			<!-- 增加路人判断显示 @zm 2013-12-13 End -->
+        Rank:0 漏洞数:1        | www.wellsun.com)
+	
+	<div class="likebox">
+        <span class="likepre" title="赞！" rel="108095"></span>
+        <span class="liketext liketext_min"><span id="likenum_108095">0</span></span>
+        <span class="likesuf"></span>
+    </div>
+                </div><!-- reply-info End -->
+
+                <div class="description">
+                    <p>@error 确定吗？URL 里的XH也是加密了，是不是MD5加密 </p>
+                </div>
+
+                <div class="replylist-act">
+                		<span class="floor">18#</span>
+                        <a title="回复 wellsun" href="javascript:void(0)" class="replyBtn" onclick="Reply(&#39;wellsun&#39;)">回复此人</a>
+                </div>
+            </div><!-- reply-content End -->
+        </li>
+                <li class="reply clearfix">
+            <div class="reply-content">
+                <div class="reply-info">
+        <span class="addtime">2014-08-24 19:16</span> |
+    		<a target="_blank" href="http://www.wooyun.org/whitehats/scanf">scanf</a> 
+			<!-- 增加路人判断显示 @zm 2013-12-13 Begin -->
+			( 普通白帽子  |			<!-- 增加路人判断显示 @zm 2013-12-13 End -->
+        Rank:429 漏洞数:91        | 学习.)
+	
+	<div class="likebox">
+        <span class="likepre" title="赞！" rel="108096"></span>
+        <span class="liketext liketext_min"><span id="likenum_108096">0</span></span>
+        <span class="likesuf"></span>
+    </div>
+                </div><!-- reply-info End -->
+
+                <div class="description">
+                    <p>@楼上 等细节公开再扯 </p>
+                </div>
+
+                <div class="replylist-act">
+                		<span class="floor">19#</span>
+                        <a title="回复 scanf" href="javascript:void(0)" class="replyBtn" onclick="Reply(&#39;scanf&#39;)">回复此人</a>
+                </div>
+            </div><!-- reply-content End -->
+        </li>
+                <li class="reply clearfix">
+            <div class="reply-content">
+                <div class="reply-info">
+        <span class="addtime">2014-08-26 01:55</span> |
+    		<a target="_blank" href="http://www.wooyun.org/whitehats/wellsun">wellsun</a> 
+			<!-- 增加路人判断显示 @zm 2013-12-13 Begin -->
+			( 路人 |			<!-- 增加路人判断显示 @zm 2013-12-13 End -->
+        Rank:0 漏洞数:1        | www.wellsun.com)
+	
+	<div class="likebox">
+        <span class="likepre" title="赞！" rel="108281"></span>
+        <span class="liketext liketext_min"><span id="likenum_108281">0</span></span>
+        <span class="likesuf"></span>
+    </div>
+                </div><!-- reply-info End -->
+
+                <div class="description">
+                    <p>2012的新版本（2013年10月份最新版），基本全国都使用一个版本的。通杀是有可能的，如果他能逆出那个加密的话。 </p>
+                </div>
+
+                <div class="replylist-act">
+                		<span class="floor">20#</span>
+                        <a title="回复 wellsun" href="javascript:void(0)" class="replyBtn" onclick="Reply(&#39;wellsun&#39;)">回复此人</a>
+                </div>
+            </div><!-- reply-content End -->
+        </li>
+                <li class="reply clearfix">
+            <div class="reply-content">
+                <div class="reply-info">
+        <span class="addtime">2014-08-26 07:16</span> |
+    		<a target="_blank" href="http://www.wooyun.org/whitehats/%E5%A5%BD%E5%9F%BA%E5%8F%8B%E4%B8%80%E8%BE%88%E5%AD%90">好基友一辈子</a> 
+			<!-- 增加路人判断显示 @zm 2013-12-13 Begin -->
+			( 路人 |			<!-- 增加路人判断显示 @zm 2013-12-13 End -->
+        Rank:12 漏洞数:6        )
+	
+	<div class="likebox">
+        <span class="likepre" title="赞！" rel="108283"></span>
+        <span class="liketext liketext_min"><span id="likenum_108283">0</span></span>
+        <span class="likesuf"></span>
+    </div>
+                </div><!-- reply-info End -->
+
+                <div class="description">
+                    <p>貌似要忽略 </p>
+                </div>
+
+                <div class="replylist-act">
+                		<span class="floor">21#</span>
+                        <a title="回复 好基友一辈子" href="javascript:void(0)" class="replyBtn" onclick="Reply(&#39;好基友一辈子&#39;)">回复此人</a>
+                </div>
+            </div><!-- reply-content End -->
+        </li>
+                <li class="reply clearfix">
+            <div class="reply-content">
+                <div class="reply-info">
+        <span class="addtime">2014-08-26 10:00</span> |
+    		<a target="_blank" href="http://www.wooyun.org/whitehats/wefgod">wefgod</a> 
+			<!-- 增加路人判断显示 @zm 2013-12-13 Begin -->
+			( 普通白帽子  |			<!-- 增加路人判断显示 @zm 2013-12-13 End -->
+        Rank:1547 漏洞数:146        | 无影响厂商忽略)
+	
+	<div class="likebox">
+        <span class="likepre" title="赞！" rel="108295"></span>
+        <span class="liketext liketext_min"><span id="likenum_108295">0</span></span>
+        <span class="likesuf"></span>
+    </div>
+                </div><!-- reply-info End -->
+
+                <div class="description">
+                    <p>@scanf md5为什么方便，原来的可以直接解密的不是更方便，MD5的话有个万一就悲剧了 </p>
+                </div>
+
+                <div class="replylist-act">
+                		<span class="floor">22#</span>
+                        <a title="回复 wefgod" href="javascript:void(0)" class="replyBtn" onclick="Reply(&#39;wefgod&#39;)">回复此人</a>
+                </div>
+            </div><!-- reply-content End -->
+        </li>
+                <li class="reply clearfix">
+            <div class="reply-content">
+                <div class="reply-info">
+        <span class="addtime">2014-08-26 10:03</span> |
+    		<a target="_blank" href="http://www.wooyun.org/whitehats/s3xy">s3xy</a> 
+			<!-- 增加路人判断显示 @zm 2013-12-13 Begin -->
+			( 普通白帽子  |			<!-- 增加路人判断显示 @zm 2013-12-13 End -->
+        Rank:169 漏洞数:33        | 寻个临时工作。)
+	
+	<div class="likebox">
+        <span class="likepre" title="赞！" rel="108296"></span>
+        <span class="liketext liketext_min"><span id="likenum_108296">0</span></span>
+        <span class="likesuf"></span>
+    </div>
+                </div><!-- reply-info End -->
+
+                <div class="description">
+                    <p>@wefgod 同意。原来的方法是100%成功率的话，变md5就是70%了。 </p>
+                </div>
+
+                <div class="replylist-act">
+                		<span class="floor">23#</span>
+                        <a title="回复 s3xy" href="javascript:void(0)" class="replyBtn" onclick="Reply(&#39;s3xy&#39;)">回复此人</a>
+                </div>
+            </div><!-- reply-content End -->
+        </li>
+                <li class="reply clearfix">
+            <div class="reply-content">
+                <div class="reply-info">
+        <span class="addtime">2014-08-26 10:05</span> |
+    		<a target="_blank" href="http://www.wooyun.org/whitehats/scanf">scanf</a> 
+			<!-- 增加路人判断显示 @zm 2013-12-13 Begin -->
+			( 普通白帽子  |			<!-- 增加路人判断显示 @zm 2013-12-13 End -->
+        Rank:429 漏洞数:91        | 学习.)
+	
+	<div class="likebox">
+        <span class="likepre" title="赞！" rel="108297"></span>
+        <span class="liketext liketext_min"><span id="likenum_108297">0</span></span>
+        <span class="likesuf"></span>
+    </div>
+                </div><!-- reply-info End -->
+
+                <div class="description">
+                    <p>哦，这样啊,方正我没有解密脚本，所以觉得的MD5好一些.. </p>
+                </div>
+
+                <div class="replylist-act">
+                		<span class="floor">24#</span>
+                        <a title="回复 scanf" href="javascript:void(0)" class="replyBtn" onclick="Reply(&#39;scanf&#39;)">回复此人</a>
+                </div>
+            </div><!-- reply-content End -->
+        </li>
+                <li class="reply clearfix">
+            <div class="reply-content">
+                <div class="reply-info">
+        <span class="addtime">2014-08-26 11:15</span> |
+    		<a target="_blank" href="http://www.wooyun.org/whitehats/wefgod">wefgod</a> 
+			<!-- 增加路人判断显示 @zm 2013-12-13 Begin -->
+			( 普通白帽子  |			<!-- 增加路人判断显示 @zm 2013-12-13 End -->
+        Rank:1547 漏洞数:146        | 无影响厂商忽略)
+	
+	<div class="likebox">
+        <span class="likepre" title="赞！" rel="108302"></span>
+        <span class="liketext liketext_min"><span id="likenum_108302">0</span></span>
+        <span class="likesuf"></span>
+    </div>
+                </div><!-- reply-info End -->
+
+                <div class="description">
+                    <p>@s3xy 是啊 </p>
+                </div>
+
+                <div class="replylist-act">
+                		<span class="floor">25#</span>
+                        <a title="回复 wefgod" href="javascript:void(0)" class="replyBtn" onclick="Reply(&#39;wefgod&#39;)">回复此人</a>
+                </div>
+            </div><!-- reply-content End -->
+        </li>
+                <li class="reply clearfix">
+            <div class="reply-content">
+                <div class="reply-info">
+        <span class="addtime">2014-08-27 16:56</span> |
+    		<a target="_blank" href="http://www.wooyun.org/whitehats/tkey">tkey</a> 
+			<!-- 增加路人判断显示 @zm 2013-12-13 Begin -->
+			( 路人 |			<!-- 增加路人判断显示 @zm 2013-12-13 End -->
+        Rank:2 漏洞数:1        | try harder)
+	
+	<div class="likebox">
+        <span class="likepre" title="赞！" rel="108468"></span>
+        <span class="liketext liketext_min"><span id="likenum_108468">0</span></span>
+        <span class="likesuf"></span>
+    </div>
+                </div><!-- reply-info End -->
+
+                <div class="description">
+                    <p>兄弟  一个学校的  你也太高调了  我都知道你是谁了 </p>
+                </div>
+
+                <div class="replylist-act">
+                		<span class="floor">26#</span>
+                        <a title="回复 tkey" href="javascript:void(0)" class="replyBtn" onclick="Reply(&#39;tkey&#39;)">回复此人</a>
+                </div>
+            </div><!-- reply-content End -->
+        </li>
+                <li class="reply clearfix">
+            <div class="reply-content">
+                <div class="reply-info">
+        <span class="addtime">2014-08-27 17:02</span> |
+    		<a target="_blank" href="http://www.wooyun.org/whitehats/scanf">scanf</a> 
+			<!-- 增加路人判断显示 @zm 2013-12-13 Begin -->
+			( 普通白帽子  |			<!-- 增加路人判断显示 @zm 2013-12-13 End -->
+        Rank:429 漏洞数:91        | 学习.)
+	
+	<div class="likebox">
+        <span class="likepre" title="赞！" rel="108470"></span>
+        <span class="liketext liketext_min"><span id="likenum_108470">0</span></span>
+        <span class="likesuf"></span>
+    </div>
+                </div><!-- reply-info End -->
+
+                <div class="description">
+                    <p>洞主小心啊！！！！楼上认出你了@tkey @sin </p>
+                </div>
+
+                <div class="replylist-act">
+                		<span class="floor">27#</span>
+                        <a title="回复 scanf" href="javascript:void(0)" class="replyBtn" onclick="Reply(&#39;scanf&#39;)">回复此人</a>
+                </div>
+            </div><!-- reply-content End -->
+        </li>
+                <li class="reply clearfix">
+            <div class="reply-content">
+                <div class="reply-info">
+        <span class="addtime">2014-08-27 23:59</span> |
+    		<a target="_blank" href="http://www.wooyun.org/whitehats/~%E5%A5%88%E4%BD%95~">~奈何~</a> 
+			<!-- 增加路人判断显示 @zm 2013-12-13 Begin -->
+			( 路人 |			<!-- 增加路人判断显示 @zm 2013-12-13 End -->
+        Rank:2 漏洞数:1        | web安全有点兴趣)
+	
+	<div class="likebox">
+        <span class="likepre" title="赞！" rel="108528"></span>
+        <span class="liketext liketext_min"><span id="likenum_108528">0</span></span>
+        <span class="likesuf"></span>
+    </div>
+                </div><!-- reply-info End -->
+
+                <div class="description">
+                    <p>@1angxi 求细节， 是那个照片遍历接口吗？　求交流+Q:1535068423 </p>
+                </div>
+
+                <div class="replylist-act">
+                		<span class="floor">28#</span>
+                        <a title="回复 ~奈何~" href="javascript:void(0)" class="replyBtn" onclick="Reply(&#39;~奈何~&#39;)">回复此人</a>
+                </div>
+            </div><!-- reply-content End -->
+        </li>
+                <li class="reply clearfix">
+            <div class="reply-content">
+                <div class="reply-info">
+        <span class="addtime">2014-08-28 19:48</span> |
+    		<a target="_blank" href="http://www.wooyun.org/whitehats/cooFool">cooFool</a> 
+			<!-- 增加路人判断显示 @zm 2013-12-13 Begin -->
+			( 路人 |			<!-- 增加路人判断显示 @zm 2013-12-13 End -->
+        Rank:0 漏洞数:2        | 终于通过了。)
+	
+	<div class="likebox">
+        <span class="likepre" title="赞！" rel="108615"></span>
+        <span class="liketext liketext_min"><span id="likenum_108615">0</span></span>
+        <span class="likesuf"></span>
+    </div>
+                </div><!-- reply-info End -->
+
+                <div class="description">
+                    <p>求指导，谢谢 </p>
+                </div>
+
+                <div class="replylist-act">
+                		<span class="floor">29#</span>
+                        <a title="回复 cooFool" href="javascript:void(0)" class="replyBtn" onclick="Reply(&#39;cooFool&#39;)">回复此人</a>
+                </div>
+            </div><!-- reply-content End -->
+        </li>
+                <li class="reply clearfix">
+            <div class="reply-content">
+                <div class="reply-info">
+        <span class="addtime">2014-08-28 20:50</span> |
+    		<a target="_blank" href="http://www.wooyun.org/whitehats/%E6%B5%B7%E7%BB%B5%E5%AE%9D%E5%AE%9D">海绵宝宝</a> 
+			<!-- 增加路人判断显示 @zm 2013-12-13 Begin -->
+			( 普通白帽子  |			<!-- 增加路人判断显示 @zm 2013-12-13 End -->
+        Rank:192 漏洞数:37        | 唯有梦想与好姑娘不可辜负.)
+	
+	<div class="likebox">
+        <span class="likepre" title="赞！" rel="108620"></span>
+        <span class="liketext liketext_min"><span id="likenum_108620">0</span></span>
+        <span class="likesuf"></span>
+    </div>
+                </div><!-- reply-info End -->
+
+                <div class="description">
+                    <p>求私信详情，WB感谢QAQ </p>
+                </div>
+
+                <div class="replylist-act">
+                		<span class="floor">30#</span>
+                        <a title="回复 海绵宝宝" href="javascript:void(0)" class="replyBtn" onclick="Reply(&#39;海绵宝宝&#39;)">回复此人</a>
+                </div>
+            </div><!-- reply-content End -->
+        </li>
+                <li class="reply clearfix">
+            <div class="reply-content">
+                <div class="reply-info">
+        <span class="addtime">2014-08-29 11:14</span> |
+    		<a target="_blank" href="http://www.wooyun.org/whitehats/My5t3ry">My5t3ry</a> 
+			<!-- 增加路人判断显示 @zm 2013-12-13 Begin -->
+			( 路人 |			<!-- 增加路人判断显示 @zm 2013-12-13 End -->
+        Rank:27 漏洞数:12        )
+	
+	<div class="likebox">
+        <span class="likepre" title="赞！" rel="108675"></span>
+        <span class="liketext liketext_min"><span id="likenum_108675">0</span></span>
+        <span class="likesuf"></span>
+    </div>
+                </div><!-- reply-info End -->
+
+                <div class="description">
+                    <p>看描述好像我去年提交裤带的这个：
+http://loudong.360.cn/vul/info/id/1777 </p>
+                </div>
+
+                <div class="replylist-act">
+                		<span class="floor">31#</span>
+                        <a title="回复 My5t3ry" href="javascript:void(0)" class="replyBtn" onclick="Reply(&#39;My5t3ry&#39;)">回复此人</a>
+                </div>
+            </div><!-- reply-content End -->
+        </li>
+                <li class="reply clearfix">
+            <div class="reply-content">
+                <div class="reply-info">
+        <span class="addtime">2014-08-29 14:01</span> |
+    		<a target="_blank" href="http://www.wooyun.org/whitehats/cooFool">cooFool</a> 
+			<!-- 增加路人判断显示 @zm 2013-12-13 Begin -->
+			( 路人 |			<!-- 增加路人判断显示 @zm 2013-12-13 End -->
+        Rank:0 漏洞数:2        | 终于通过了。)
+	
+	<div class="likebox">
+        <span class="likepre" title="赞！" rel="108719"></span>
+        <span class="liketext liketext_min"><span id="likenum_108719">0</span></span>
+        <span class="likesuf"></span>
+    </div>
+                </div><!-- reply-info End -->
+
+                <div class="description">
+                    <p>@My5t3ry 求详细。我要试试我们学校、求带各种，rmb感谢啊@sin </p>
+                </div>
+
+                <div class="replylist-act">
+                		<span class="floor">32#</span>
+                        <a title="回复 cooFool" href="javascript:void(0)" class="replyBtn" onclick="Reply(&#39;cooFool&#39;)">回复此人</a>
+                </div>
+            </div><!-- reply-content End -->
+        </li>
+                <li class="reply clearfix">
+            <div class="reply-content">
+                <div class="reply-info">
+        <span class="addtime">2014-09-03 17:55</span> |
+    		<a target="_blank" href="http://www.wooyun.org/whitehats/wellsun">wellsun</a> 
+			<!-- 增加路人判断显示 @zm 2013-12-13 Begin -->
+			( 路人 |			<!-- 增加路人判断显示 @zm 2013-12-13 End -->
+        Rank:0 漏洞数:1        | www.wellsun.com)
+	
+	<div class="likebox">
+        <span class="likepre" title="赞！" rel="109300"></span>
+        <span class="liketext liketext_min"><span id="likenum_109300">0</span></span>
+        <span class="likesuf"></span>
+    </div>
+                </div><!-- reply-info End -->
+
+                <div class="description">
+                    <p>欢迎大家加入通杀教务系统漏洞QQ 群： 310068074 </p>
+                </div>
+
+                <div class="replylist-act">
+                		<span class="floor">33#</span>
+                        <a title="回复 wellsun" href="javascript:void(0)" class="replyBtn" onclick="Reply(&#39;wellsun&#39;)">回复此人</a>
+                </div>
+            </div><!-- reply-content End -->
+        </li>
+                <li class="reply clearfix">
+            <div class="reply-content">
+                <div class="reply-info">
+        <span class="addtime">2014-09-10 16:52</span> |
+    		<a target="_blank" href="http://www.wooyun.org/whitehats/ki11y0u">ki11y0u</a> 
+			<!-- 增加路人判断显示 @zm 2013-12-13 Begin -->
+			( 路人 |			<!-- 增加路人判断显示 @zm 2013-12-13 End -->
+        Rank:0 漏洞数:1        | 好好学习，天天向上~)
+	
+	<div class="likebox">
+        <span class="likepre" title="赞！" rel="110118"></span>
+        <span class="liketext liketext_min"><span id="likenum_110118">0</span></span>
+        <span class="likesuf"></span>
+    </div>
+                </div><!-- reply-info End -->
+
+                <div class="description">
+                    <p>膜拜大牛~ </p>
+                </div>
+
+                <div class="replylist-act">
+                		<span class="floor">34#</span>
+                        <a title="回复 ki11y0u" href="javascript:void(0)" class="replyBtn" onclick="Reply(&#39;ki11y0u&#39;)">回复此人</a>
+                </div>
+            </div><!-- reply-content End -->
+        </li>
+                <li class="reply clearfix">
+            <div class="reply-content">
+                <div class="reply-info">
+        <span class="addtime">2014-09-11 11:03</span> |
+    		<a target="_blank" href="http://www.wooyun.org/whitehats/%E5%8F%91%E6%9D%A1%E6%A9%99%E5%AD%90">发条橙子</a> 
+			<!-- 增加路人判断显示 @zm 2013-12-13 Begin -->
+			( 路人 |			<!-- 增加路人判断显示 @zm 2013-12-13 End -->
+        Rank:19 漏洞数:6        | ∑(っ °Д °;)っ)
+	
+	<div class="likebox">
+        <span class="likepre" title="赞！" rel="110245"></span>
+        <span class="liketext liketext_min"><span id="likenum_110245">0</span></span>
+        <span class="likesuf"></span>
+    </div>
+                </div><!-- reply-info End -->
+
+                <div class="description">
+                    <p>public static string jiemi(string PlainStr, string key)
+{
+    string NewStr ="";
+    int Pos = 1;
+    if ((Strings.Len(PlainStr) % 2) == 0)
+    {
+        string Side1 = Strings.StrReverse(Strings.Left(PlainStr, (int) Math.Round((double) (((double) Strings.Len(PlainStr)) / 2.0))));
+        string Side2 = Strings.StrReverse(Strings.Right(PlainStr, (int) Math.Round((double) (((double) Strings.Len(PlainStr)) / 2.0))));
+        PlainStr = Side1 + Side2;
+    }
+    int _Vb_t_i4_0 = Strings.Len(PlainStr);
+    for (int i = 1; i &lt;= _Vb_t_i4_0; i++)
+    {
+        string strChar = Strings.Mid(PlainStr, i, 1);
+        string KeyChar = Strings.Mid(key, Pos, 1);
+        if (((((Strings.Asc(strChar) ^ Strings.Asc(KeyChar)) &lt; 0x20) | ((Strings.Asc(strChar) ^ Strings.Asc(KeyChar)) &gt; 0x7e)) | (Strings.Asc(strChar) &lt; 0)) | (Strings.Asc(strChar) &gt; 0xff))
+        {
+            NewStr = NewStr + strChar;
+        }
+        else
+        {
+            NewStr = NewStr + StringType.FromChar(Strings.Chr(Strings.Asc(strChar) ^ Strings.Asc(KeyChar)));
+        }
+        if (Pos == Strings.Len(key))
+        {
+            Pos = 0;
+        }
+        Pos++;
+    }
+    return NewStr;
+}
+解密是这个吗 </p>
+                </div>
+
+                <div class="replylist-act">
+                		<span class="floor">35#</span>
+                        <a title="回复 发条橙子" href="javascript:void(0)" class="replyBtn" onclick="Reply(&#39;发条橙子&#39;)">回复此人</a>
+                </div>
+            </div><!-- reply-content End -->
+        </li>
+                <li class="reply clearfix">
+            <div class="reply-content">
+                <div class="reply-info">
+        <span class="addtime">2014-09-11 12:57</span> |
+    		<a target="_blank" href="http://www.wooyun.org/whitehats/sin">sin</a> 
+			<!-- 增加路人判断显示 @zm 2013-12-13 Begin -->
+			( 路人 |			<!-- 增加路人判断显示 @zm 2013-12-13 End -->
+        Rank:20 漏洞数:1        | 业余选手:))
+	
+	<div class="likebox">
+        <span class="likepre" title="赞！" rel="110255"></span>
+        <span class="liketext liketext_min"><span id="likenum_110255">0</span></span>
+        <span class="likesuf"></span>
+    </div>
+                </div><!-- reply-info End -->
+
+                <div class="description">
+                    <p>@tkey 兄弟，你不要吓我。 哎，别人家的孩纸9月7日，正方sql注入提交到360收获2000软妹币，有点受伤呐。 </p>
+                </div>
+
+                <div class="replylist-act">
+                		<span class="floor">36#</span>
+                        <a title="回复 sin" href="javascript:void(0)" class="replyBtn" onclick="Reply(&#39;sin&#39;)">回复此人</a>
+                </div>
+            </div><!-- reply-content End -->
+        </li>
+            </ol><!-- replylist End -->
+</div><!-- replys End -->
+
+<div class="reply">
+<a name="comment"></a>
+<form id="commentForm" action="http://www.wooyun.org/bug.php?action=comment&do=submit&id=73449" onsubmit="CheckComment();return false;" method="POST">
+<p class="detail"><textarea rows="4" cols="60" id="comment_content" name="comment_content"></textarea></p>
+<p class="detail">
+验证码 <input type="text" id="captcha" name="captcha" style="width:80px">&nbsp;<img id="captcha_img" onclick="this.src=&#39;/captcha.php?&#39;+Math.random()" style="width:65px;height:18px;cursor:pointer" src="./通用型正方教务（通杀各版本）存在注入（不需登陆）+获得webshell+提权内网漫游   WooYun-2014-73449   WooYun.org_files/captcha.php" align="absmiddle">
+&nbsp;&nbsp;<input type="button" onclick="CheckComment()" value="发表评论">　<span id="comment_err" style="color:red"></span>
+</p>
+</form>
+<script type="text/javascript">
+
+function CheckComment(){
+	var errorCount=0;
+	var comment_content=$("#comment_content").val();
+	var captcha=$("#captcha").val();
+	if(comment_content=="" || comment_content=="点击输入评论内容"){
+		$("#comment_err").html("请输入评论内容！");
+		errorCount++;
+	}else{
+		$("#comment_err").html("");
+		if(captcha==""){
+			$("#comment_err").html("请输入验证码！");
+			errorCount++;
+		}else{
+			$("#comment_err").html("");
+		}
+	}
+	if(errorCount==0){
+		var url=$("#commentForm").attr("action");
+		url=url+"&fun=ajax";
+		$.post(url,{"comment_content":comment_content,"captcha":captcha,"r":Math.random()},function(re){
+			if(re.err==0){
+				$("#comment_err").html("");
+				var liObj=document.createElement("li");
+				$(".replylist").append(liObj);
+				$(liObj).addClass("reply");
+				$(liObj).addClass("clearfix");
+				$(liObj).css("background","#ddd");
+				var brief=re.data.brief=="" ? "" : " | "+re.data.brief;
+				var idHtml='';
+				if(re.data.type==0){
+					idHtml='<a target="_blank" href="http://www.wooyun.org/whitehats/'+re.data.username+'">'+re.data.username+'</a> ('+re.data.identity+' | Rank:'+re.data.rank+' 漏洞数:'+re.data.bugs+brief+')';
+				}else{
+					idHtml='<a target="_blank" href="http://www.wooyun.org/corps/'+re.data.username+'">'+re.data.username+'</a>(乌云厂商)';
+				}
+				var html='<div class="reply-content"><div class="reply-info"><span class="addtime">'+re.data.addTime+'</span> | ';
+				html+=idHtml;
+				html+='</div><div class="description"><p>'+re.data.content+'</p></div>';
+				html+='<div class="replylist-act"><a onclick="Reply(\''+re.data.username+'\')" class="replyBtn" href="javascript:void(0)" style="display: none;">回复此人</a></div>';
+				html+='</div>';
+				$(liObj).html(html);
+				$("#comment_content").val("");
+				$("#captcha").val("");
+				$("#captcha_img").click();
+				$(liObj).mouseenter(function(){
+					$(this).find('.replyBtn').show();
+				}).mouseleave(function(){
+					$(this).find('.replyBtn').hide();
+				});
+				setTimeout(function(){ $(liObj).css("background","#fff"); },3000);
+			}else{
+				$("#comment_err").html(re.content);
+			}
+		},'json');
+	}
+}
+
+function Reply(value){
+	var obj=$("#comment_content");
+	obj.focus();
+	obj.val("@"+value+" "+obj.val());
+}
+
+$('.replylist li').mouseenter(function(){
+    $(this).find('.replyBtn').show();
+}).mouseleave(function(){
+	$(this).find('.replyBtn').hide();
+});
+
+</script>
+<script type="text/javascript">
+
+function CommentLike(id){
+	$.post("/ajaxdo.php?module=commentrating",{"id":id,"token":$("#token").val()},function(re){
+		re=parseInt(re);
+		switch(re){
+			case 1:
+				$("#likenum_"+id).html(parseInt($("#likenum_"+id).html())+1);
+				break;
+			case 4:
+				alert("已赞过此条评论");
+				break;
+			case 6:
+				alert("不能评价自己发布的评论");
+				break;
+			default:break;
+		}
+	});
+}
+$(document).ready(function(){
+	$(".likebox .likepre").click(function(){
+            CommentLike($(this).attr("rel"));
+        });
+});
+
+
+</script>
+<div>
+	</div>
+	<div id="footer">
+        <span class="copyright fleft">
+    		Copyright © 2010 - 2014 <a href="http://www.wooyun.org/bugs/wooyun-2010-073449#">wooyun.org</a>, All Rights Reserved
+    		<a href="http://www.miibeian.gov.cn/">吉ICP备12001400号-1</a>
+    		<!--a href="http://sae.sina.com.cn" target="_blank"><img src="/images/sae_bottom_logo.png" title="Powered by Sina App Engine"></a-->
+    	</span>
+        <span class="other fright">
+            <a href="http://www.wooyun.org/impression">行业观点</a>
+            · <a href="http://www.wooyun.org/lawer">法律顾问</a>
+            · <a href="http://www.wooyun.org/contactus">联系我们</a>
+            · <a href="http://www.wooyun.org/help">帮助</a>
+            · <a href="http://www.wooyun.org/about">关于</a>
+        </span>
+    </div>
+	<script type="text/javascript">
+	var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+	document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fc12f88b5c1cd041a732dea597a5ec94c' type='text/javascript'%3E%3C/script%3E"));
+	</script><script src="./通用型正方教务（通杀各版本）存在注入（不需登陆）+获得webshell+提权内网漫游   WooYun-2014-73449   WooYun.org_files/h.js" type="text/javascript"></script>
+    <script type="text/javascript" id="bdshare_js" data="type=button" src="./通用型正方教务（通杀各版本）存在注入（不需登陆）+获得webshell+提权内网漫游   WooYun-2014-73449   WooYun.org_files/bds_s_v2.js"></script>
+    
+    <script type="text/javascript">
+        document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + new Date().getHours();
+        
+        if (top.location !== self.location) top.location=self.location;
+    </script>
+
+</div></div></body></html>

@@ -1,0 +1,1 @@
+/struts2-blank/example/HelloWorld.action

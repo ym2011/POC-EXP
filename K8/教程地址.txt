@@ -1,0 +1,46 @@
+
+
+[动画]K8飞刀一键免杀网马演示动画教程  
+http://qqhack8.blog.163.com/blog/static/1141479852014111424654594/
+
+[动画]K8飞刀教程 一键生成EXP工具演示  
+http://qqhack8.blog.163.com/blog/static/114147985201542833145959/
+
+[动画]K8飞刀教程 S2-020 getshell (Struts2 exploit)
+http://qqhack8.blog.163.com/blog/static/1141479852014631101529789/
+
+[动画]K8飞刀教程 正则抓取WordPress用户
+http://qqhack8.blog.163.com/blog/static/1141479852015428111538804/
+
+[动画]K8飞刀教程 WordPress GetShell & XSS添加管理员 演示动画教程
+http://qqhack8.blog.163.com/blog/static/11414798520141134492875/
+
+[动画]K8飞刀教程 mysql注入点拿shell & UDF提权 
+http://qqhack8.blog.163.com/blog/static/11414798520154283395592/
+
+[动画]K8飞刀教程 零基础构造Discuz论坛csrf
+http://qqhack8.blog.163.com/blog/static/114147985201542833724591/
+
+[动画]K8飞刀教程 Google黑客功能演示
+http://qqhack8.blog.163.com/blog/static/11414798520154283281976/
+
+[动画]K8飞刀教程 网站2级域名扫描
+http://qqhack8.blog.163.com/blog/static/11414798520154283252854/
+
+[图文]K8飞刀教程 一分钟"开发"EXP 无需编程功底
+http://qqhack8.blog.163.com/blog/static/11414798520154142434893/
+
+[动画]K8飞刀教程 elfinder 2.x 0day GetShell
+http://qqhack8.blog.163.com/blog/static/11414798520154141494572/
+
+[动画]K8飞刀教程 Wordpress Mobile Edition插件远程文件读取漏洞利用  
+http://qqhack8.blog.163.com/blog/static/114147985201532225728840/
+
+[动画]K8飞刀教程 连接CFM PYTHON PERL脚本WebShell动画演示教程  
+http://qqhack8.blog.163.com/blog/static/114147985201478115956765/
+
+[动画]K8飞刀教程 虚拟CMD使用教程(支持连接ASPX/PHP/ASP/JSP一句话)  
+http://qqhack8.blog.163.com/blog/static/114147985201331682855294/
+
+[动画]K8飞刀教程 Tipask 2.0 注入为例URL二次编码 与Hackbar对比
+http://qqhack8.blog.163.com/blog/static/114147985201462702928918/

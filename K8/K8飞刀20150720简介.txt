@@ -1,0 +1,50 @@
+K8飞刀是一款多功能的渗透测试工具。Hacker Swiss Army Knife.
+
+0x001  1 WebShell管理支持(asp/php/aspx/jsp/cfm/perl/python)7种脚本
+       2 列目录不同类型敏感文件(不同颜色+图标)高亮显示(首页文件黄色+首页图标
+         密码类文件key图标,提权工具则紫色+高危图标,配置文件蓝色+配置图标)
+	   3 支持批量检测webshell是否存活/批量删除掉线shell
+	   4 支持导入飞刀Shell/菜刀Shell/TXT格式WebShell
+  
+0x002  HackerIE EXP提交支持(Get/Post/Cookie/Referer/UserAgent)
+       调式成功的payload可添加到数据库,也可一键生成EXP利用工具
+	   黑客浏览器--自动检测当前网页所有URL是否存在SQL注入
+	   伪造IP(VIA/X_FORWARDED_FOR/Client-IP) 突破IP访问限制
+	   
+0x003  CookieHack(一键伪造Cookie登陆/获取当前浏览页面Cookie)	   
+0x004  EncodeDecode(Hacking实战功能)
+       0 Hacking Team Flash0day Shellcode格式转换 & 多种格式ShellCode测试工具
+       1 Cookie伪造(已添加Ecshop后台Cookie代码生成)
+       2 Web提交(一键生成CSRF代码/或者生成EXP)已支持JQuery/Flash/PHP/Perl/Python脚本
+	   3 Bat/批处理(多行转一行/一行反转多行/Bat转成Teensy脚本)
+	   4 VBS脚本(随机ASCII码加密可一键免杀网马/VBS转bat脚本/VBS转Teensy脚本)
+	   5 WebShell(常用各种脚本WebShell/一键合成图片木马)过狗一句话
+	   6 GetShell(各种拿Shell代码生成)已添加Drupal/Discuz/WordPress拿Shell代码
+	   7 0day网马(全版本IE挂马漏洞MS14065 & Acunetix WVS <=9.5全版本挂马漏洞)
+	   8 USB Hack已添加大量Teensy渗透脚本(独家同时兼容Windows/Linux)
+	     还支持自定义代码转Teensy脚本,Windows分CMD和PowerShell两种方式
+		 
+0x005  EncodeDecode(渗透常用加密解密算法/各种编码转换)  
+       1 MD5(16/32) SHA1(40/256/384/512) 等常用加密算法
+	   2 (Base64编码/URL编码/Hex编码/ASCCII码)均支持GB2312/UTF-8/Unicode互转
+       3 各种数据库SQL注入对应(ASCII/HEX),UDF/MOF提权转SQL语句
+	   4 XSS编码(FormCharCode/JS_hex/JS_unicode/JS_Escape/HTML实体dec/HTML实体Hex)等
+	   5 File/文件 (文件转16进制/文件转JS_hex/文件转ASCII) 挂马常用
+	   6 Unicode转Ansi Ansi转Unicode Unix时间戳转换 DeDeCMS密码解密
+		 
+0x006  EncodeDecode(其它功能)
+       1 Code/代码 各种编码语言代码互转/转义修复/域名解析IP等
+       2 指定长度字符生成(溢出常用 比如WP4.2存储XSS 64K字符截断)	   
+	   
+0x007  CmdShell支持7种脚本,内置一些常用cmd渗透命令,一键提权
+
+0x008  EXP-DB(漏洞利用库)集成大量Web漏洞EXP,目前已添加95个EXP
+
+0x009  DataOutPut支持注入点脱库,正则提取,也可用于某些fuzz测试
+
+0x010  ScanAdmin极速后台扫描/网站子域名扫描/WordPress用户采集
+
+0x011  XSS挂马流量分析系统(功能暂未开放)
+
+0x012  Google黑客(批量抓取URL/批量处理结果)/批量检测URL是否存在SQL注入
+

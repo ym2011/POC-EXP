@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-16"?>
+<themes>
+	<window>
+		<logwindow icon_point="4,4">
+			<canvas normal="0xff77cb00" image="./Image/background_mainwnd.jpg" fill="0"/>
+			<border normal="0xff638c39" width="1" inner="0xffffffff"/>
+			<font face="微软雅黑,宋体,Tahoma" color="0xffffff" size="8" bold="0" italic="0" underline="0" bind_font_by_language="0" ref=""/>
+			<shadow border="5,3,5,7" image="./Image/window_shadow.png"/>
+			<caption show="0" height="40" color="0xffffffff"/>
+			<system_button offset_pos="0" cap="0" top="0">
+				<close width="35" height="24" image="./Image/close.png"/>
+				<min width="29" height="24" image="./Image/min.png"/>
+			</system_button>
+		</logwindow>
+	</window>
+	<tabpage> 
+		<tabpage_default> 
+			<canvas normal="0xffffffff" hot="0xffffffff" selected="0xf1ffffff" tab_focus="0xffffa500" radius="0" overlap="0" tab_focus_height="4"/>  
+			<border normal="0xff262626" width="0" hot="0xff808080" selected="0xff808080"/>  
+			<font face="微软雅黑,tahoma,宋体" color="0x00b5e513" size="9" bold="1" italic="0" underline="0"/> 
+		</tabpage_default> 
+	</tabpage>
+	<button>
+		<default>
+			<canvas normal="0xff808080" shine="0xffebecee"/>
+			<border normal="0xffb1b8bb" width="0" inner="0xff000000"/>
+			<font face="微软雅黑,tahoma,宋体" color="0x00474747" size="9" bold="0" italic="0" underline="0"/>
+		</default>
+		<large>
+			<canvas normal="0xff808080" shine="0xffebecee"/>
+			<border normal="0xffb1b8bb" width="0" inner="0xff000000"/>
+			<font face="微软雅黑,tahoma,宋体" color="0x00474747" size="11" bold="0" italic="0" underline="0"/>
+		</large>
+	</button>
+	<text>
+		<default> 
+			<canvas normal="0xf1fafbfa"/>  
+			<border width="1" outer="0xffe1e1e1" normal="0xffe1e1e1"/>  
+			<font face="微软雅黑,tahoma,宋体" color="0x00808080" size="9" bold="0" italic="0" underline="0"/>  
+		</default>
+	</text>
+	<static>
+		<default>
+			<canvas normal="0xff5e5e5e"/>
+			<border normal="0xff400040" width="1"/>
+			<font face="微软雅黑,tahoma,宋体" color="0x00474747" size="9" bold="0" italic="0" underline="0"/>
+			<caption normal="0xff474747" hot="0xff474747" selected="0xff474747" link_color="0xff474747"/>
+		</default>
+		<skin_change_9>
+			<canvas normal="0x00ffffff"/>
+			<border normal="0xffffffff" width="1"/>
+			<font face="微软雅黑,宋体,Tahoma" color="0x00ffffff" size="9" bold="0" italic="0" underline="0"/>
+			<caption normal="0xffffffff" hot="0xffffffff" selected="0xffffffff" link_color="0xffffffff" disable_color="0xff808080" draw_background="0"/>
+		</skin_change_9>
+		<log_9_gray>
+			<canvas normal="0x003f3f3f"/>
+			<border normal="0xff3f3f3f" width="1"/>
+			<font face="微软雅黑,宋体,Tahoma" color="0x003f3f3f" size="9" bold="0" italic="0" underline="0"/>
+			<caption normal="0xff3f3f3f" hot="0xff3f3f3f" selected="0xff3f3f3f" link_color="0xff3f3f3f" disable_color="0xff3f3f3f" draw_background="0"/>
+		</log_9_gray> 
+		<default_black>
+			<canvas normal="0x00ffffff"/>
+			<border normal="0xff000000" width="1"/>
+			<font face="微软雅黑,宋体,Tahoma" color="0x00000000" size="9" bold="0" italic="0" underline="0" bind_font_by_language="0" ref=""/>
+			<caption normal="0xff000000" hot="0xff000000" selected="0xff000000" link_color="0xff000000" disable_color="0xff808080" draw_background="0"/>
+		</default_black>
+	</static>
+	<picture> 
+		<default> 
+			<canvas normal="0xffffffff"/>  
+			<border normal="0xff1f1f1f" width="1" inner="0xf1f0f0f0" shine="0xff4634ff"/> 
+		</default>  
+	</picture>
+	<scrollbar>
+		<default>
+			<canvas normal="0x00ffffff" shine="0x006e006e" hot="0x00720065" selected="0x0022003d">
+				<arrow normal="0x00780030" arrow_size="14"/>
+				<track normal="0x00660066" background="0x00ffffff" shine="0x00ffffff" background_size="12" line="0x00ffffff"/>
+			</canvas>
+			<border normal="0xff000000" width="1" inner="0x00300078" hot="0x003d0074" selected="0x00300022">
+				<track normal="0x00730020" hot="0x006c0065" selected="0x00630065"/>
+				<arrow normal="0x00660030">
+					<triangle normal="0x00660066" hot="0x00660066" selected="0x00220066"/>
+				</arrow>
+			</border>
+			<scroll_images arrow_ul="" arrow_dr="" scroll_bg="IDI_EXAMINE_SCROLLBAR_BG" thumb_ul="" thumb_dr="" thumb_bg="IDI_EXAMINE_SCROLLBAR_THUMB" thumb_center=""/>
+		</default>
+	</scrollbar>
+	<rich_list> 
+		<entnotice_detail_list> 
+			<canvas normal="0xffffffff"/>  
+			<border normal="0xfff7f8f8" width="1" gridline="0xfff0f0f0"/>  
+			<select outer="0xfff0f0f0" inner="0xfff0f0f0" start="0xfff0f0f0" end="0xfff0f0f0"/>  
+			<hover outer="0xfff0f0f0" inner="0xfff0f0f0" start="0xfff0f0f0" end="0xfff0f0f0"/>  
+			<sub_select start="0x00000000" end="0x00000000"/>  
+			<vscroll_theme scrollbar_theme="default"/>  
+			<hscroll_theme scrollbar_theme="default"/> 
+		</entnotice_detail_list> 
+	</rich_list>
+	<panel>
+		<default>
+			<canvas normal="0xffffffff" radius="0" angle="0"/>
+			<border normal="0xffffffff" width="0" inner="0xffffffff" hot="0x00ffffff" selected="0xffffffff" inner_hot="0xffffffff" inner_select="0xffffffff"/>
+			<vscroll_theme scrollbar_theme="default"/>
+		</default>
+		<log_bottom_panel>
+			<canvas normal="0xfff7f8f8" radius="0" angle="0"/>
+			<border normal="0xfff7f8f8" width="0" inner="0xfff7f8f8" hot="0x00f7f8f8" selected="0xfff7f8f8" inner_hot="0xfff7f8f8" inner_select="0xfff7f8f8"/>
+			<vscroll_theme scrollbar_theme=""/>
+		</log_bottom_panel>
+		<log_top_line_gray> 
+			<canvas normal="0xffffffff" radius="0" angle="90"/>  
+			<border normal="0xffd9d9d9" width="1" inner="0xffd9d9d9" hot="0xffd9d9d9" selected="0xffd9d9d9"/>  
+			<vscroll_theme scrollbar_theme=""/> 
+		</log_top_line_gray> 
+	</panel>
+	<splitter>
+		<default>
+			<canvas normal="0xdeffffff"/>
+			<border normal="0xff" width="1" thumb="0x1"/>
+		</default>
+		<splitter_log>
+			<canvas normal="0xdef7f8f8"/>
+			<border normal="0xff" width="1" thumb="0x1"/>
+		</splitter_log>
+	</splitter>
+</themes>

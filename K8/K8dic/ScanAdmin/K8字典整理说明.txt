@@ -1,0 +1,100 @@
+
+K8专用字典整理工具 by K8拉登哥哥
+博客 http://qqhack8.blog.163.com
+
+
+网上有很多所谓的字典整理工具 压根就没针对以下情况整理
+各种扫描字典里都是因为如下情况 导致有很多重复的数据
+
+K8扫描专用字典25W条 是从那收集来的100多W条数据 经过以下算法整理出来的
+
+第一种情况
+
+带#的 这些一般是数据库防下载的
+
+比如 www.xxx.com/#data.mdb 是网站数据库
+如果不把#替换成%23 扫描时
+#后面的被隔断 相当于只扫www.xxx.com 
+这样扫 工具永远会提示 网址存在 因为xxx.com 永远返回200
+以前的人在制作字典的时候没有把#转成%23 当然这一步也可以在工具里替换
+只是我个人觉得 先处理好 就不用每次扫描的时候 都要有一堆时间放在转换上
+转换一个#  0.000几秒 要是同时扫描几十W条记录的时候 这堆就得要浪费时间了
+
+第二种情况
+
+类似 havij等其它工具 字典里的 %EXT% 这个让工具碰到这个变量后 
+就分别扫这个名称的asp jsp aspx php等 EXT 就扩展名的缩写 并非哪个网站的后缀
+
+log-in.%EXT% 
+login.%EXT%
+adminlogin.%EXT%
+admin%EXT%
+
+%EXT%替换成 .PHP 因为havij 还是针对PHP站比较多 所以转换成这个后缀
+
+第三种情况
+
+../../../admin/
+../admin/login
+../../../admin/../../
+../admin/login../
+../../../admin/
+../admin/login
+../../../admin/../../
+../admin/login../..
+
+前后有很多.. 或/ 结尾的 严重重复又干扰扫描结果
+
+经过几个步骤后 我们再去掉重复的数据 就比较合理了
+
+第四种情况
+
+../admin
+admin
+/admin/
+/Admin/../
+Admin
+../Admin
+./Admin/
+
+如果是在Windows系统下的网站 上面的字典 就只有 admin 一个而已
+如果是在Linux下的话 也只有 Admin  和 admin 两个
+
+第五种情况
+
+字典里有很多结尾是?号的 下面是我随便复制的几个
+
+admindefault.asp?
+admin/default.asp?
+admin/editor/admin_login.asp?
+admin_default.asp?
+admindefault.asp?
+default_default.asp?
+editor/admin_login.asp?
+index_default.asp?
+indexdefault.asp?
+login/default.asp?
+login_default.asp?
+logindefault.asp?
+
+
+下面给一个实际的整理结果 第一次整理14W数据时 变成6W多
+第二次整理48W 还是只有7W左右 这说明神马问题 很多重复的
+
+由于网站 有LINUX 所以保留了大小写
+
+如果你平时只搞WINDOWS站的话 可以全部转换成小写后 再去重复 
+这样你的字典将会更小  因为区分大小写 
+会有如下情况  还是假设Admin目录
+
+Admin  ADmin  AdMin adMin  adMIN 等等 这些 在WINDOWS下 
+可只是 一个ADMIN 而以啊 扫描同一个目录 几十次 很浪费时间啊
+
+
+下面还有一些情况的垃圾目录 还没去掉
+
+第1种
+200|500-> HEAD :/data/sdbbs.ful.cn
+200|500->head:/data/sdbbs.ful.cn.a
+
+

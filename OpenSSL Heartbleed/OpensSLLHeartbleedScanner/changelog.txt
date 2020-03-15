@@ -1,0 +1,8 @@
+CrowdStrike Heartbleed Scanner v 1.2.0.0
+----------------------------------------
+
+What's new:
+
+The scanner has an option to automatically populate the list of targets and generate a port list that is enumerated from the list of listening TCP services on the local system. After pressing the Localhost button the current targets and port list will be replaced with the aforementioned results in preparation for a scan.
+
+This feature is included to test the (admittedly unlikely) scenario where you have an OpenSSL-enabled application running on your system, listening for connections, that could potentially be vulnerable to the Heartbleed bug.

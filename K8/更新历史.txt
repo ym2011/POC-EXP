@@ -1,0 +1,557 @@
+
+K8飞刀  by K8拉登哥哥@[K8搞基大队]
+
+博客: http://qqhack8.blog.163.com
+
+简介: K8飞刀是一款多功能的渗透测试工具. Hacker Swiss Army Knife.
+
+      内置大量漏洞EXP/GetShell/0day网马/U盘自动种马/脱库采集工具
+      支持7种WebShell管理/后台扫描/2级域名扫描/WordPress用户扫描
+      黑客浏览器/自动检测注入/自动收集信息/Exp调式/可一键生成EXP
+      多种编码转换/一键CSRF构造/Cookie一键登陆/XSS编码/SQL提权等
+
+
+========================================================================================================
+K8飞刀 2015国庆版
+
+[+]EncodeDecode       Hacking--0day漏洞--Word远程代码执行MS15-022        20150929
+
+[+]EncodeDecode       Hacking--0day漏洞--WinRAR自解压远程代码执行        20150929
+
+[+]EncodeDecode       Hacking--0day漏洞--MS13-071主题远程代码执行        20150924
+
+[+]EncodeDecode       编码转换--VBS脚本--VBS下载者(http木马地址)         20150920
+
+========================================================================================================
+K8飞刀 20150911
+
+[+]EncodeDecode       编码转换--File/文件--Mysql Inject OutFile          20150909
+
+[+]FileShell          PHP UserAgent一句话/普通一句话 修改时间            20150828
+
+[+]FileShell          PHP UserAgent一句话/普通一句话文件重命名           20150828
+
+[+]FileShell          PHP UserAgent一句话 修复 中文文件名读取            20150827
+
+[+]FileShell          PHP UserAgent一句话 支持Linux系统服务器            20150826
+
+[+]FileShell          PHP UserAgent一句话 服务器文件下载到本地           20150825
+
+[+]FileShell          PHP UserAgent一句话 本地文件上传到服务器           20150825
+
+[+]FileShell          PHP UserAgent一句话 下载URL文件到服务器            20150825
+
+[+]FileShell          PHP UserAgent一句话 删除目标服务器文件             20150825
+
+[+]EncodeDecode       Hacking--GetShell  Lnx-CMD-Echo写shell             20150825
+
+[+]EncodeDecode       Hacking--GetShell  Win-CMD-Echo写shell             20150825
+
+[+]EncodeDecode       Hacking--VBS脚本--VBS(字符串转ASCII码)             20150825
+
+[+]FileShell          PHP UserAgent一句话 列目录(显示直观大小)           20150821
+
+[+]EncodeDecode       编码转换--ASCII码-多格式ASCII码转字符串            20150817
+
+[+]EncodeDecode       Hacking--VBS脚本--VBS(字符串转ASCII码)             20150817
+
+[+]CmdShell           PHP UserAgent WebShell(新型一句话木马)             20150813
+
+========================================================================================================
+K8飞刀 20150725
+
+[u]检测更新           不再强制跳转URL,允许用户选择是否更新               20150725
+
+[+]Exploit-DB         腾达无线路由器(Tenda 11N)登陆密码绕过              20150724
+
+[+]SysSeting          支持SOCKS5代理设置(配合Htran内网渗透)              20150723
+
+[+]WebShell           导出Shell--导出TXT格式--存活WebShell               20150721
+
+[+]WebShell           导出Shell--导出TXT格式--掉线WebShell               20150721
+
+[+]WebShell           导出Shell--导出TXT格式--全部WebShell               20150721
+
+========================================================================================================
+K8飞刀 20150720       ShellCode Loader
+
+[+]EncodeDecode       Hacking--ShellCode--ShellCode Loader              20150720
+
+[+]EncodeDecode       Hacking--ShellCode--HexString2CharArray           20150720
+
+[+]EncodeDecode       Hacking--ShellCode--CharArray2HexString           20150720
+
+========================================================================================================
+K8飞刀 20150713       Hacking Team Flash0day ShellCode Exploit
+
+[+]EncodeDecode       Hacking--ShellCode--ByteArray2UintArray           20150713
+
+[+]EncodeDecode       Hacking--ShellCode--UintArray2ByteArray           20150713
+
+[+]EncodeDecode       Hacking--ShellCode--CharArray2UintArray           20150711
+
+[+]EncodeDecode       Hacking--ShellCode--UintArray2CharArray           20150711
+
+[+]EncodeDecode       Hacking--ShellCode--ByteArray2CharArray           20150711
+
+[+]EncodeDecode       Hacking--ShellCode--CharArray2ByteArray           20150708
+
+========================================================================================================
+K8飞刀 20150705
+
+[+]EncodeDecode       Hacking--WebShell--新型Cookie一句话木马           20150705
+
+[+]程序图标右键       FastStart(右键菜单快速启动CMD & K8飞刀)           20150703
+
+[+]EncodeDecode       编码转换--DeDeCMS管理员密码加密解密算法           20150701
+
+[+]EncodeDecode       Unix时间戳格式与时间互转 获取当前时间戳           20150629
+
+[+]HackerIE           浏览器模式 修复Cookier伪造欺骗无效的BUG           20150628
+
+========================================================================================================
+K8飞刀 20150628
+
+[+]HackerIE           黑客浏览器伪造IP(VIA/X_FORWARDED_FOR/Client-IP)   20150628
+
+[+]EncodeDecode       Hacking--WebShell--非数字非字母PHP一句话          20150628
+
+[+]EncodeDecode       Base64编码--PHP反解Base64代码                     20150624
+
+[+]EncodeDecode       实用功能--路径转义 \转\\ \\转\                    20150623
+
+[u]程序界面           更新IIS ASPX PHP IP小图标                         20150623
+
+[+]Exploit-DB         世界第一电子商务系统 Magento 1.7.0.2 漏洞EXP      20150615
+
+========================================================================================================
+K8飞刀 20150610
+
+[+]WebShell           批量删除掉线WebShell(使用前先检测存活状态)        20150610
+
+[u]EncodeDecode       USB Hack--BadUSB--VBS转Teensy脚本支持&符号        20150610
+
+[+]EncodeDecode       实用功能--选中内容 CMD运行/Bat运行/VBS运行        20150609
+
+[+]EncodeDecode       Hacking--WebShell--K8飞刀专用Perl一句话           20150608
+
+[+]EncodeDecode       Hacking--WebShell--K8飞刀专用CFM一句话            20150608
+
+[+]EncodeDecode       Hacking--WebShell--K8飞刀专用Python一句话         20150608
+
+[+]EncodeDecode       Hacking--WebShell--无(单引号和$post)PHP一句话     20150608
+
+[+]EncodeDecode       Hacking--WebShell--无(单引号和分号)PHP一句话      20150608
+
+[+]EncodeDecode       Acunetix WVS <=9.5 全版本远程代码执行漏洞EXP      20150603
+
+========================================================================================================
+K8飞刀 20150601
+
+[+]WebShell           导入TXT格式WebShell(格式:Shell地址 空格 密码      20150601
+
+[+]GoogleHacker       Google黑客搜索模块--导入URL(所有文本文件)         20150601
+
+[+]GoogleHacker       Google黑客搜索模块--抓取的URL自动进行URL解码      20150601
+
+[+]GoogleHacker       Google黑客搜索模块--批量检测URL是否存在SQL注入    20150601
+
+[+]GoogleHacker       Google黑客搜索模块--批量处理URL--保留结尾目录     20150531
+
+[+]HackerIE           Hack模式自动检测当前页面所有URL是否存在SQL注入    20150531
+
+[+]HackerIE           Hack模式--浏览网站自动记录Banner/IP/地理等信息    20150530
+
+[+]EncodeDecode       编码转换--Unicode2Ansi & Ansi2Unicode             20150530
+
+[+]DataOutput         藏文乱码(首先系统要安装藏文) 很多站用UTF8就搞定   20150529
+
+[+]DataOutput         新增欧美系统编码ISO-8859-1(西藏文字)              20150529
+
+[u]程序界面           相关功能模块选中项进行高亮显示                    20150528
+
+[+]ScanAdmin          WP用户采集(WP3.41 WP3.52 WP3.61 WP3.81 WP3.88)    20150527
+
+[+]ScanAdmin          WordPress用户采集(WP4.10 WP4.12 WP4.21 WP4.2b3)   20150526
+
+========================================================================================================
+K8飞刀 20150520
+
+[+]ScanAdmin          网站子域名扫描/二级域名扫描(渗透大型站点必备)     20150520
+
+[+]ExpDebug           一键生成EXP功能 调式好的EXP可直接生成EXE工具      20150519
+
+[+]Exploit-DB         EXP按钮右键菜单添加生成EXP功能 可直接生成EXE      20150518
+
+[u]EncodeDecode       右键调整(相关功能转Hacking) 新增域名解析功能      20150517
+
+[+]GoogleHacker       Google黑客搜索模块--加载搜索语法\批量处理URL      20150516
+
+[u]EncodeDecode       Web提交-PHP/Python/Perl/Flash/jQuery脚本完善      20150515
+
+[u]EncodeDecode       USB Hack--BadUSB--Teensy 完善相关脚本兼容性       20150515
+
+[u]EncodeDecode       修复WEB提交参数中出现邮箱可能会导致CSRF失败       20150515
+
+[+]Exploit-DB         elfinder <=2.0 rc1 文件上传漏洞 GetShell          20150512
+
+========================================================================================================
+K8飞刀 20150511
+
+[u]自动更新           不再强制自动更新...仅在标题和弹框提示最新版       20150511
+
+[+]EncodeDecode       USB Hack--BadUSB--Teensy 完善对笔记本兼容性       20150504
+
+[+]EncodeDecode       其它功能 指定长度字符串生成(比如WP 64K XSS)       20150501
+
+[+]EncodeDecode       URL编码 单字符(双引号 #号 :号 /号 -号)互转        20150501
+
+[+]EncodeDecode       URL编码 单字符(单引号 逗号 分号 点号) 互转        20150501
+
+========================================================================================================
+K8飞刀 20150425 WP漏洞专版
+
+
+[+]Exploit-DB         WordPress photo-uploader 1.8     PHP文件上传漏洞  20150425
+
+[+]Exploit-DB         WordPress Simple Ads Manager 2.5.96  SQL注入漏洞  20150425
+
+[+]Exploit-DB         WordPress Business Intelligence   SQL注入漏洞EXP  20150425
+
+[+]Exploit-DB         WordPress Security & Firewall 3.9 SQL注入漏洞EXP  20150425
+
+[+]Exploit-DB         WordPress Ajax Store Locator 1.2  SQL注入漏洞EXP  20150425
+
+[+]Exploit-DB         WordPress sp-client-document-manager SQL注入漏洞  20150425
+
+[+]Exploit-DB         WordPress Tune Library 1.5.4      SQL注入漏洞EXP  20150425
+
+[+]Exploit-DB         Wordpress MiwoFTP <= 1.0.5       文件下载漏洞EXP  20150425
+
+[+]Exploit-DB         Wordpress NEX-Forms 3.0           SQL注入漏洞EXP  20150425
+
+[+]Exploit-DB         Magento Server MAGMI  插件本地包含漏洞EXP         20150425
+
+[+]Exploit-DB         ThinkPHP <= 2.1       任意代码执行漏洞EXP         20150423
+
+[+]Exploit-DB         ThinkPHP <=3.1.3      SQL注入漏洞利用EXP          20150423
+
+[+]Exploit-DB         Wordpress Mobile Edition 2.7 文件读取EXP          20150422
+
+K8飞刀 20150418
+
+[+]Exploit-DB         CMS Made Simple 1.2.2 (TinyMCE) SQL注入EXP        20150417
+
+[+]Exploit-DB         CMS Made Simple 1.1.2 Remote Code Execution       20150417
+
+[+]Exploit-DB         CMS Made Simple 1.4.1 LFI 0day Exploit            20150417
+
+========================================================================================================
+K8飞刀 20150412 BadUSB专版
+
+[+]EncodeDecode       USB Hack--BadUSB--Teensy  过UAC执行任意脚本       20150412
+
+[+]EncodeDecode       USB Hack--BadUSB--Teensy  执行自定义BAT脚本       20150412
+
+[+]EncodeDecode       USB Hack--BadUSB--Teensy  执行自定义VBS脚本       20150412
+
+[+]EncodeDecode       USB Hack--BadUSB--Teensy 添加管理员开启3389       20150412
+
+[+]EncodeDecode       VBS脚本(VBS转BAT脚本 VBS转CMD命令渗透常用)        20150412
+
+[+]EncodeDecode       USB Hack--BadUSB--Teensy Win 开启Telnet脚本       20150410
+
+[+]EncodeDecode       USB Hack--BadUSB--Teensy Win-EN DNS修改脚本       20150410
+
+[+]EncodeDecode       USB Hack--BadUSB--Teensy Win 添加管理员脚本       20150409
+
+[+]EncodeDecode       USB Hack--BadUSB--Teensy(Win&Lnx)下载者脚本       20150406
+
+[+]EncodeDecode       USB Hack--BadUSB--Teensy Linux   下载者脚本       20150406
+
+[+]EncodeDecode       USB Hack--BadUSB--Teensy Hacked by  装B脚本       20150324
+
+[+]EncodeDecode       USB Hack--BadUSB--Teensy Arduino 下载者脚本       20150320
+
+
+[+]Exploit-DB         帝国备份王万能Cookie登陆后台Exp(需修改时间戳)     20150319
+
+[+]EncodeDecode       Ecshop管理员md5转成Cookie 可直接进入2.7.x后台     20150311
+
+[+]Exploit-DB         Discuz产品 SupeSite 6.x 7.x 全版本SQL注入EXP      20150311
+
+[+]Exploit-DB         Discuz! 7.2 faq.php注入爆表前缀EXP                20150311
+
+[+]Exploit-DB         vBulletin 3 & 4 ajax.php SQL注入爆管理Exploit     20150311
+
+[+]Exploit-DB         ThinkPHP URL安全漏洞SQL注入爆管理员EXP            20150311
+
+[+]GoogleHack         新增GoogleHack模块,提高工作效率                   20150127
+
+[+]WebShell           完善PHP文件管理功能(文件下载功能)                 20150121
+
+[+]WebShell           PHP文件管理(无权限+禁用图标 空目录+灰色图标)      20150120
+
+[+]WebShell           完善PHP文件管理功能(增加Linux列目录功能)          20150120
+
+[+]WebShell           完善PHP文件管理功能(右键增加复制目录结构功能)     20150120
+
+[+]WebShell           完善PHP文件管理功能(文件删除/列目录更新)          20150116
+
+[+]WebShell           右键发送到相关模块,相关功能优化                   20150116
+
+[+]ExpDebug           GET和POST提交-流文件保存功能                      20150115
+
+[+]WebShell           完善PHP文件管理功能(文件下载到服务器功能)         20150115
+
+========================================================================================================
+K8飞刀 20150114
+
+[+]EncodeDecode       URL编码保留Get或Post常用的=号和&符 另附单独转换   20150114
+
+[+]Exploit-DB         Discuz! X系列产品升级/转换漏洞 GetShell Exp       20150114
+
+[+]Exploit-DB         修复修改EXP附加URL无法更新的bug                   20150114
+
+[+]WebShell           WebShell表新增Shell类型字段,用于区分各种提交方式  20150112
+
+[+]ScanAdmin          极速后台扫描(右键增加 复制选中URL 保存扫描结果)   20150109
+
+[+]WebShell           完善PHP文件管理功能(文件上传功能)                 20150108
+
+[+]EncodeDecode       Code代码(去掉代码前序号[格式(序号+空格+代码)])    20150107
+
+[+]性能优化           修复某些功能网络连接卡死的Bug                     20150107
+
+[+]WebShell           完善文件管理功能(密码/Ke/证书类-绿色+Key图标      20150106
+
+[+]WebShell           WebShell在控状态检测(以是否能执行代码为标准)      20150105
+
+[+]WebShell           完善PHP文件管理功能(脚本配置文件-蓝色+设置图标    20150101
+ 
+[+]WebShell           完善PHP文件管理功能(常用目录-紫色目录图标显示     20150101
+
+[+]WebShell           完善PHP文件管理功能(WebShell类-普通紫色+黑脸图标  20150101
+
+[+]WebShell           完善PHP文件管理功能(提权类黑客类-高亮紫色+图标)   20141231
+
+[+]EncodeDecode       修复WebShell图片木马合成不支持空格路径的Bug       20141228
+
+========================================================================================================
+K8飞刀 20141220
+
+[+]EncodeDecode       进制转换(10进制\2进制\8进制\16进制)               20141220
+
+[+]EncodeDecode       File2JsHex(文件转成JS16进制 网页内嵌木马常用)     20141219
+
+[+]EncodeDecode       WebShell图片木马合成(上传绕过WAF或留包含后门)     20141218
+
+[+]EncodeDecode       VBS脚本随机ASCII加密解密(一秒免杀IE神洞网马)      20141214
+
+========================================================================================================
+K8飞刀 20141208 CSRF专版
+
+[+]EncodeDecode       Post提交代码(Flash/jQuery/Flash/Python/Perl/PHP)  20141208
+
+[+]EncodeDecode       Python Post参数 与 常规Post参数 互转(方便写EXP)   20141208
+
+[+]EncodeDecode       Flash  Post参数 与 常规Post参数 互转(XSS-CSRF用)  20141208
+
+[+]EncodeDecode       jQuery Post参数 与 常规Post参数 互转(XSS-CSRF用)  20141206
+
+[+]EncodeDecode       增加WordPress后台主题GetShell代码 + 右键菜单美化  20141203
+
+[+]ExpDebug           增加右键复制 Web全部信息 Banner/IP/地址位置信息   20141202
+
+========================================================================================================
+K8飞刀 20141130
+
+[+]EncodeDecode       选中URL可右键使用 Firefox\Chrome\IE 浏览器打开    20141128
+
+[+]DataOutput         正则截取数据(结果支持同时提取8个参数 灵活度更高)  20141128
+
+K8飞刀 20141125 IE神洞版
+
+[+]EncodeDecode       IE神洞 MS14-065 CVE-2014-6332 网马生成            20141125
+
+[+]XSSanalysis        XSS挂马流量分析系统 未完成.. 静请期待             20141125
+
+[+]EncodeDecode       PHP-Chr连接字符串(点号 +号)互转 WebShell常用      20141123
+
+[+]ScanAdmin          极速后台扫描(WebShell\PHP\JSP\ASP\ASPX大量字典)   20141120
+
+
+========================================================================================================
+K8飞刀 20141111 光棍专版 
+
+[+]ExpDebug           增加Banner/IP/地址位置信息 美化各项配置属性       20141110
+
+[+]DataOutput         修复不能读取配置文件长字符串的BUG                 20141107
+
+[+]DataOutput         自动保存当前脱库配置信息/重起程序后自动加载       20141106
+
+[+]DataOutput         XP不显示脱库速度/多线程脱库时不能停止的bug        20141106
+
+[+]DataOutput         注入点脱库(多线程) + 计算脱库速度                 20141104
+
+[+]EncodeDecode       多行字符串 转成 C# StringBuffer代码 开发用        20141103
+
+[+]EncodeDecode       相对路径生成 Discuz 6.x/7.x代码执行漏洞EXP        20141103
+
+========================================================================================================
+K8飞刀 20141101
+
+[+]EncodeDecode       代码多行转一行 Bat逻辑命令符转成一行与反转        20141101
+
+[+]程序界面           XP/2003 工具栏图标按钮位置调整                    20141101
+
+[+]ExpDebug           支持多国语言编码 (解决不同区域返回乱码问题)       20141031
+
+[+]ExpDebug           支持多国语言编码 (解决不同区域返回乱码问题)       20141031
+
+[+]DataOutput         Big5(HK)编码,修复脱库时HK繁体乱码的问题           20141030
+
+[+]Exploit-DB         EXP按钮右键添加发送到DataOutput模块功能           20141030
+
+[+]Exploit-DB         增加robots.txt查看按钮(大部分网站都会有的)        20141030
+
+[+]ExpDebug/Exploit   禁用掉错误提示脚本  添加Discuz 7.2 相关EXP        20141029
+
+[+]EncodeDecode       Drupal后台PHP-Chr连接字符串 GetShell代码生成      20141027
+
+[+]EncodeDecode       PHP GetShell代码 PHP-Chr连接字符串生成与反转      20141027
+
+[+]程序界面           界面直观 (工具栏/右键菜单/Tab头)添加相应图标      20141025
+
+[+]EncodeDecode       Drupal后台 (PHP Filter)模块GetShell 代码生成      20141022
+
+[+]Exploit-DB         支持导入20141022版本前数据库(提示新增EXP数量)     20141022
+
+[+]ExploitDebug       Exploit-DB模块 新增自定义 网址 附加URL 参数       20141022
+
+[+]EncodeDecode       Hex编码(GB2312\UTF8\Unicode)  Hex解码GB2312       20141019
+
+[+]EncodeDecode       SQL注入 Hex文件路径(MSSQL) Hex文件路径(Mysql)     20141018
+
+[+]EncodeDecode       界面  编辑框只留一个  加密算法全放置右键菜单      20141017
+
+[+]Exploit-DB         drupal 7.31 SQL注入漏洞 EXP (测试 7.12 7.31)      20141017
+
+[+]程序界面           国庆花一天 弄K8工具当年常用时尚透明皮肤(.Net)     20141005
+
+[+]EncodeDecode       增加数据库(Oracle MYSQL MSSQL)4种CHAR格式解密     20140925
+
+[+]EncodeDecode       所有文本框 右键菜单增加 转大小写 转全半角功能     20140920
+
+[+]WebShell           添加/修改WebShell 增加高级模式  默认简易模式      20140908
+
+[+]EncodeDecode       Delphi互转其它代码用到  赋值 := 互转 =            20140824
+
+[+]EncodeDecode       各语言代码常用 转义字符双引号  \" 互转 "          20140824
+
+[+]CheckUpdate        检测最否有最新版 提示编译日期并打开URL地址        20140818
+
+[+]DataOutput         脱库模块 SQL注入点脱库 也可用于WebFuzzing         20140814
+
+[+]Exploit-DB         修复 执行EXP  提交UserAgent只能一次的问题         20140813
+
+[+]ExploitDebug       修复浏览器模式提交UserAgent只能一次的问题         20140813
+ 
+[+]ExploitManage      添加 Zimbra LFI 0day exploit 本地包含漏洞         20140812
+
+[+]FileManage         ShellManage右键文件管理模块-PHP列目录完成         20140811
+
+[+]EncodeDecode       路径常用符号互转 /转\\  \\转/  /转\  \转/         20140811
+
+========================================================================================================
+K8飞刀 20140810
+
+[+]工具标题           增加节日提醒 (公历节日、农历节日)                 20140810
+
+[+]CmdShell           Perl Cmd WebShell    (Perl一句话木马连接)         20140807
+
+[+]CmdShell           Python Cmd WebShell  (Python一句话木马连接)       20140806
+
+[+]CmdShell           ColdFusion Cmd WebShell (CFM一句话木马连接)       20140805
+
+[+]ShellManage        合并数据库(支持导入菜刀数据库) 进行管理           20140805
+
+[+]ShellManage        修复 WebShell 添加/修改提示对象已释放Bug          20140805
+
+[+]ShellManage        添加 WebShell 判断是否已存在 不重复添加           20140805
+
+========================================================================================================
+K8飞刀 20140731
+
+[+]ExploitManage      添加Apache Struts2 S2-020 GetShell EXP            20140731
+
+[+]EncodeDecode       空格转%20 空格转/**/(Struts2漏洞用到)             20140731
+
+[+]ExploitManage      添加已存在EXP 会提示EXP对应按扭名称               20140729
+
+[+]ExploitManage      允许添加修改 EXP按钮名称较长字符串                20140729
+
+[+]EncodeDecode       XSS常用 JS Escape默认加密与全部加密               20140728
+
+[+]EncodeDecode       XSS常用 FromCharCode专用ASCII码生成               20140728
+
+[+]EncodeDecode       XSS常用 JS转义 (16进制/Unicode)字符串             20140728
+
+[+]EncodeDecode       XSS常用 HTML实体编码(10进制/16进制)               20140728
+
+========================================================================================================
+K8飞刀 20140725 
+
+[+]ExploitManage      添加18个Fckeditor 19个Joomla 0day漏洞EXP          20140725
+
+[+]ExploitManage      添加Discuz! 7.2 faq.php 注入 0day漏洞EXP          20140725
+
+[+]ExploitManage      Tipask 2.0 ajaxsearch URL编码注入漏洞EXP          20140725
+
+[+]EncodeDecode       字符串转Unicode Unicode转字符串 SHA1加密          20140725
+
+[+]EncodeDecode       SHA加密算法系列 (SHA256 SHA384 SHA512)            20140725
+
+[+]ExploitManage      右键增加导入合并其它数据库的EXP数据功能           20140721
+
+[+]EncodeDecode       Base64 支持3种编码(GB2312 UTF8 Unicode)           20140721
+
+[+]EncodeDecode       URL编码支持3种编码(GB2312 UTF8 Unicode)           20140721
+
+[+]ShellManage        右键删除增加是否删除提示,免得误删Shell            20140720
+
+[+]ExploitManage      右键EXP按钮可删除和修改当前按钮对应EXP            20140716
+
+[+]ExploitManage      动态创建按钮加载对应Payload,生成漏洞EXP           20140714
+
+[+]Get/Post提交       一键添加EXP到Web_Exploit模块数据库功能            20140711
+
+[+]Get/Post提交       None模式(只浏览网页不提交任何数据)                20140711
+
+
+========================================================================================================
+K8飞刀 20140707
+
+[+]Get/Post提交      Cookie格式不对,提交闪退的Bug                       20140707
+
+[+]EncodeDecode      任意文件 转换HEX编码(16进制)                       20140703
+
+[+]EncodeDecode      任意文件 转换CHR编码(ASC码)                        20140703
+
+[+]EncodeDecode      UDF提权 MYSQL HEX格式编码转换                      20140703
+
+[+]EncodeDecode      UDF提权 MYSQL CHR格式编码转换                      20140703
+
+[+]EncodeDecode      MOF提权 MYSQL HEX格式编码转换                      20140703
+         
+[+]EncodeDecode      MOF提权 MYSQL CHR格式编码转换                      20140703
+
+[+]Get/Post提交      伪造 HTTP Referer (请求来源)                       20140626
+
+[+]Get/Post提交      userAgent 自定义编辑                               20140608
+
+[+]Get/Post提交      userAgent修复(之前版本忘了加了)                    20140423
+
+========================================================================================================
+
+[+]之前的 回忆过去,痛苦的相思忘不了.
