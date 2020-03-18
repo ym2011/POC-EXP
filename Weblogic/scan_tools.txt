@@ -1,0 +1,4 @@
+https://github.com/0xn0ne/weblogicScanner
+
+
+https://github.com/rabbitmask/WeblogicScanLot
